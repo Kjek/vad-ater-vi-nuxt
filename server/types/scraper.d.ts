@@ -1,4 +1,4 @@
-import { LunchMenu, WeekMenu } from '~/types/lunch-menu';
+import type { LunchMenu, WeekMenu } from '~/types/lunch-menu';
 
 type Scraper = (
   lunchUrl: string,

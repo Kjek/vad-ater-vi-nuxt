@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { AsyncDataRequestStatus } from '#app';
-import { FetchError } from 'ofetch';
+import type { FetchError } from 'ofetch';
 
 export const useRequestStatusToast = (
   status: Ref<AsyncDataRequestStatus, AsyncDataRequestStatus>,

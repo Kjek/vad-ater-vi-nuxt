@@ -1,18 +1,43 @@
 <template>
-  <UForm :validate="validate" :state="state" class="space-y-4" @submit.prevent="onSubmit">
-    <UFormField label="Username" name="username">
+  <UForm
+    :validate="validate"
+    :state="state"
+    class="space-y-4"
+    @submit.prevent="onSubmit"
+  >
+    <UFormField
+      label="Username"
+      name="username"
+    >
       <UInput v-model="state.username" />
     </UFormField>
 
-    <UFormField label="Password" name="password">
-      <UInput v-model="state.password" type="password" />
+    <UFormField
+      label="Password"
+      name="password"
+    >
+      <UInput
+        v-model="state.password"
+        type="password"
+      />
     </UFormField>
 
-    <UFormField label="Secret" name="secret">
-      <UInput v-model="state.secret" type="password" />
+    <UFormField
+      label="Secret"
+      name="secret"
+    >
+      <UInput
+        v-model="state.secret"
+        type="password"
+      />
     </UFormField>
 
-    <UButton label="Create" type="submit" color="neutral" variant="outline" />
+    <UButton
+      label="Create"
+      type="submit"
+      color="neutral"
+      variant="outline"
+    />
   </UForm>
 </template>
 

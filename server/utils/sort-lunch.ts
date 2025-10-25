@@ -1,5 +1,5 @@
-import { LunchMenu } from '~/types/lunch-menu';
-import { sweDays, SwedishDay } from '~/types/swedish-days';
+import type { LunchMenu } from '~/types/lunch-menu';
+import { sweDays, type SwedishDay } from '~/types/swedish-days';
 
 export const sortLunch = (lunchMenu: LunchMenu[]) => {
   return lunchMenu.sort((lhs: LunchMenu, rhs: LunchMenu) =>

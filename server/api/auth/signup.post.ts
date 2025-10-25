@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { CreateAccount } from '~~/server/types/account';
+import type { CreateAccount } from '~~/server/types/account';
 
 export default defineEventHandler(async (event) => {
   const body = await readBody<CreateAccount>(event);

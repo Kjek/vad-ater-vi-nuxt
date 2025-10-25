@@ -1,7 +1,14 @@
 <template>
   <UContainer class="mt-4 mb-4">
-    <UPageList as="ul" class="gap-4">
-      <UPageCard as="li" key="all" class="bg-neutral-50 dark:bg-neutral-950">
+    <UPageList
+      class="gap-4"
+      as="ul"
+    >
+      <UPageCard
+        key="all"
+        class="bg-neutral-50 dark:bg-neutral-950"
+        as="li"
+      >
         <SettingsGeneral
           title="Re-scrape all restaurants"
           label="Re-scrape all"
@@ -9,10 +16,10 @@
         />
       </UPageCard>
       <UPageCard
-        as="li"
         v-for="config in restaurantConfigs"
         :key="config.name"
         class="bg-neutral-50 dark:bg-neutral-950"
+        as="li"
       >
         <SettingsItem
           :restaurant-id="config.restaurantId"
@@ -41,7 +48,7 @@ definePageMeta({
 
 const restaurantConfigsStore = useRestaurantConfigsStore();
 const { restaurantConfigs } = storeToRefs(restaurantConfigsStore);
-const { createNewRestaurant, updateRestaurantConfig, refresh } = restaurantConfigsStore;
+const { createNewRestaurant, updateRestaurantConfig } = restaurantConfigsStore;
 
 const onCreateNewRestaurant = async (payload: CreateRestaurantConfig) => {
   const { status, error } = await createNewRestaurant(payload);

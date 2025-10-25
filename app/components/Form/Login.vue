@@ -1,19 +1,39 @@
 <template>
-  <UForm :validate="validate" :state="state" class="space-y-4" @submit.prevent="onSubmit">
-    <UFormField label="Username" name="username">
+  <UForm
+    :validate="validate"
+    :state="state"
+    class="space-y-4"
+    @submit.prevent="onSubmit"
+  >
+    <UFormField
+      label="Username"
+      name="username"
+    >
       <UInput v-model="state.username" />
     </UFormField>
 
-    <UFormField label="Password" name="password">
-      <UInput v-model="state.password" type="password" />
+    <UFormField
+      label="Password"
+      name="password"
+    >
+      <UInput
+        v-model="state.password"
+        type="password"
+      />
     </UFormField>
 
-    <UButton label="Login" type="submit" color="neutral" variant="outline" />
+    <UButton
+      label="Login"
+      type="submit"
+      color="neutral"
+      variant="outline"
+    />
   </UForm>
 </template>
 
 <script lang="ts" setup>
-import type { FormError, FormSubmitEvent } from '@nuxt/ui';
+import type { FormError } from '@nuxt/ui';
+
 interface LocalState {
   username?: string;
   password?: string;

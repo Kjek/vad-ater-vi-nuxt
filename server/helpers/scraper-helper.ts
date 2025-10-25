@@ -1,5 +1,5 @@
 import { isLunchMenus, isWeekMenu } from '~/types/lunch-menu';
-import { PrismaType } from '../types/prisma-custom';
+import type { PrismaType } from '../types/prisma-custom';
 import { getRestaurantConfig } from './admin-db-helper';
 import { deleteMenuAndWeekly, updateRestaurantFood } from './db-helper';
 import genericWebScraper from '../scrapers/generic';

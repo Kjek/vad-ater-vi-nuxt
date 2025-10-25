@@ -1,4 +1,3 @@
-import type { Restaurant } from '~/types/lunch-menu';
 import { handleGetRestaurants } from '~~/server/helpers/lunch-menu-helper';
 
 export default defineEventHandler(async () => {

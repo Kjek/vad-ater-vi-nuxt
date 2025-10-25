@@ -1,3 +1,4 @@
+/* eslint-disable @stylistic/quotes */
 type EntityMap = Record<string, string>;
 
 export const decodeHtmlEntity = (text: string) => {
@@ -10,7 +11,7 @@ export const decodeHtmlEntity = (text: string) => {
     nbsp: ' ',
     '#160': ' ',
   };
-  return text.replaceAll(/&(\#?\w+);/gi, (match, entity: string) => {
-    return entityMap[entity] ?? match;
+  return text.replaceAll(/&(#?\w+);/gi, (match, entity: string) => {
+    return entityMap[entity.toLowerCase()] ?? match;
   });
 };

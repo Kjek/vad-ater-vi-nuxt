@@ -1,4 +1,4 @@
-import { RequiredBy } from './custom-generic';
+import type { RequiredBy } from './custom-generic';
 
 export interface UpdateSettingsParamsProps {
   id: string;
@@ -18,11 +18,3 @@ export type CreateRestaurantParamsProps = RequiredBy<
 export interface DeleteRestaurantParamsProps {
   id: string;
 }
-
-export type UpdateSettingsFunction = ({}: UpdateSettingsParamsProps) => void;
-
-export type DeleteRestaurantFunction = ({}: DeleteRestaurantParamsProps) => void;
-
-export type IdParamVoidFunction = ({}: { restaurantId: string }) => void;
-
-export type CreateRestaurantSettingsFunction = ({}: CreateRestaurantParamsProps) => void;

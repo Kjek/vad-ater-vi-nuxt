@@ -1,5 +1,8 @@
 <template>
-  <UHeader title="Lunch i Sundsvall" :toggle="false">
+  <UHeader
+    title="Lunch i Sundsvall"
+    :toggle="false"
+  >
     <template #title>
       <AppLogo class="h-6 w-auto shrink-0" />
       <h1>Lunch i Sundsvall</h1>

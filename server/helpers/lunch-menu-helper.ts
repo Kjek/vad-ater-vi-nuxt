@@ -1,4 +1,4 @@
-import { PrismaType } from '../types/prisma-custom';
+import type { PrismaType } from '../types/prisma-custom';
 import { convertRestaurant } from '../utils/restaurant-utils';
 import { getAllRestaurantConfigs } from './admin-db-helper';
 import { getAllRestaurants, searchRestaurantByName } from './db-helper';

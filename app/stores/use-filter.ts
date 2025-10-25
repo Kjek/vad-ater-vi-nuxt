@@ -1,4 +1,3 @@
-import { da } from '@nuxt/ui/runtime/locale/index.js';
 import { defineStore } from 'pinia';
 import { sweDays } from '~/types/swedish-days';
 

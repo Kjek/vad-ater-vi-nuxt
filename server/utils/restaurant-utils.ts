@@ -4,7 +4,7 @@ import type {
   RestaurantConfig as RestaurantConfigModel,
   WeeklySpecial as WeeklySpecialModel,
 } from '@prisma/client';
-import { LunchMenu, Restaurant, WeeklySpecial } from '~/types/lunch-menu';
+import type { LunchMenu, Restaurant, WeeklySpecial } from '~/types/lunch-menu';
 import { sortLunch } from './sort-lunch';
 
 export const convertRestaurant = (

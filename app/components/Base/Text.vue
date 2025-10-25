@@ -1,6 +1,9 @@
 <template>
-  <component :is="tag" :class="cn(tagClasses, attrs.class as ClassValue)">
-    <slot></slot>
+  <component
+    :is="tag"
+    :class="cn(tagClasses, attrs.class as ClassValue)"
+  >
+    <slot />
   </component>
 </template>
 
@@ -38,5 +41,3 @@ const tagClasses = computed(() => {
   }
 });
 </script>
-
-<style scoped></style>

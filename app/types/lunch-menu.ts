@@ -44,12 +44,7 @@ export const isWeekMenu = (object: unknown): object is WeekMenu => {
  * @returns {boolean}         True if object is of type LunchMenu. Otherwise false.
  */
 export const isLunchMenu = (object: unknown): object is LunchMenu => {
-  return (
-    typeof object === 'object' &&
-    object !== null &&
-    'day' in object &&
-    'food' in object
-  );
+  return typeof object === 'object' && object !== null && 'day' in object && 'food' in object;
 };
 
 /**

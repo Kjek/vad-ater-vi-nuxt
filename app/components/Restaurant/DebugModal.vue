@@ -1,9 +1,17 @@
 <template>
   <UModal v-model:open="open">
-    <UButton label="Debug" color="neutral" variant="outline" @click="onDebugClick" />
+    <UButton
+      label="Debug"
+      color="neutral"
+      variant="outline"
+      @click="onDebugClick"
+    />
     <template #body>
       <UPageCard>
-        <UTextarea v-model="data" disabled />
+        <UTextarea
+          v-model="data"
+          disabled
+        />
       </UPageCard>
     </template>
   </UModal>
@@ -19,12 +27,7 @@ interface Props {
   restaurantId: string;
 }
 
-interface Emits {
-  (e: 'debug', restaurantId: string): void;
-}
-
 const props = defineProps<Props>();
-const emit = defineEmits<Emits>();
 
 const { data, status, error, refresh } = useDebugData(props.restaurantId);
 const onDebugClick = async () => {

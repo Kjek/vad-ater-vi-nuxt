@@ -3,7 +3,9 @@
     <BaseText as="h3">
       {{ day }}
     </BaseText>
-    <BaseText as="p">{{ food }}</BaseText>
+    <BaseText as="p">
+      {{ food }}
+    </BaseText>
   </li>
 </template>
 

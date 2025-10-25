@@ -1,6 +1,6 @@
 import { prisma } from '~~/server/utils/prisma';
 import { createRestaurantConfig } from '~~/server/helpers/admin-db-helper';
-import { CreateRestaurantConfig } from '~~/server/types/restaurant-config';
+import type { CreateRestaurantConfig } from '~~/server/types/restaurant-config';
 import { getServerSession } from '#auth';
 
 export default defineEventHandler(async (event) => {

@@ -1,10 +1,25 @@
 <template>
   <SettingsItemContent>
-    <template v-if="title" #left>
-      <BaseText v-if="title" as="h3" class="grow">{{ title }}</BaseText>
+    <template
+      v-if="title"
+      #left
+    >
+      <BaseText
+        v-if="title"
+        as="h3"
+        class="grow"
+      >
+        {{ title }}
+      </BaseText>
     </template>
     <template #right>
-      <UButton v-if="label" :label="label" color="neutral" variant="outline" @click="onClick" />
+      <UButton
+        v-if="label"
+        :label="label"
+        color="neutral"
+        variant="outline"
+        @click="onClick"
+      />
     </template>
   </SettingsItemContent>
 </template>

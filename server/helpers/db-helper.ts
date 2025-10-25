@@ -1,5 +1,5 @@
-import { LunchMenu, WeeklySpecial } from '~/types/lunch-menu';
-import { PrismaType } from '../types/prisma-custom';
+import type { LunchMenu, WeeklySpecial } from '~/types/lunch-menu';
+import type { PrismaType } from '../types/prisma-custom';
 
 export const getRestaurantNeedsUpdating = async (prisma: PrismaType, id: string) => {
   const restaurant = await prisma.restaurant.findFirst({

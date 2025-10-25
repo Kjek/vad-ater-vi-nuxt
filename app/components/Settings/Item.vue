@@ -1,8 +1,10 @@
 <template>
   <SettingsItemContent>
     <template #left>
-      <UBadge :color="enabled ? 'primary' : 'error'"></UBadge>
-      <BaseText as="h3">{{ name }}</BaseText>
+      <UBadge :color="enabled ? 'primary' : 'error'" />
+      <BaseText as="h3">
+        {{ name }}
+      </BaseText>
     </template>
     <template #right>
       <RestaurantEditModal :restaurant-id="restaurantId" />

@@ -4,7 +4,10 @@
       <FormLogin @sign-in="onLogin" />
     </UPageCard>
   </UContainer>
-  <UModal v-model:open="open" title="Create Admin Account">
+  <UModal
+    v-model:open="open"
+    title="Create Admin Account"
+  >
     <UButton
       label="Create Admin Account"
       color="neutral"

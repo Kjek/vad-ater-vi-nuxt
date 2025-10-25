@@ -6,35 +6,67 @@
         title="Add Restaurant"
         description="Create a new restaurant entry for the page. Name and the URL's are mandatory"
       >
-        <UButton label="Add restaurant" color="neutral" variant="outline" />
+        <UButton
+          label="Add restaurant"
+          color="neutral"
+          variant="outline"
+        />
         <template #body>
-          <UForm :validate="validate" :state="state" class="space-y-4" @submit.prevent="onSubmit">
+          <UForm
+            :validate="validate"
+            :state="state"
+            class="space-y-4"
+            @submit.prevent="onSubmit"
+          >
             <UPageList class="gap-4">
-              <UFormField label="Name" name="name">
+              <UFormField
+                label="Name"
+                name="name"
+              >
                 <UInput v-model="state.name" />
               </UFormField>
-              <UFormField label="Homepage URL" name="homepage-url">
+              <UFormField
+                label="Homepage URL"
+                name="homepage-url"
+              >
                 <UInput v-model="state.homeUrl" />
               </UFormField>
-              <UFormField label="Lunch menu URL" name="lunch-url">
+              <UFormField
+                label="Lunch menu URL"
+                name="lunch-url"
+              >
                 <UInput v-model="state.lunchUrl" />
               </UFormField>
-              <UFormField label="Lunch RegExp (Optional)" name="lunch-regex">
+              <UFormField
+                label="Lunch RegExp (Optional)"
+                name="lunch-regex"
+              >
                 <UInput v-model="state.lunchRegex" />
               </UFormField>
-              <UFormField label="Weekly RegExp (Optional)" name="weekly-regex">
+              <UFormField
+                label="Weekly RegExp (Optional)"
+                name="weekly-regex"
+              >
                 <UInput v-model="state.weeklyRegex" />
               </UFormField>
-              <UFormField label="Enabled upon creation" name="enabled">
+              <UFormField
+                label="Enabled upon creation"
+                name="enabled"
+              >
                 <UButton
                   :label="state.enabled ? 'Enabled' : 'Disabled'"
-                  @click="toggleEnabled"
                   :color="state.enabled ? 'primary' : 'error'"
                   variant="outline"
+                  @click="toggleEnabled"
                 />
               </UFormField>
               <div class="flex self-end">
-                <UButton label="Create" type="submit" color="neutral" variant="outline" />
+                <UButton
+                  label="Create"
+                  type="submit"
+                  color="neutral"
+                  variant="outline"
+                />
               </div>
             </UPageList>
           </UForm>

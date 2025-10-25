@@ -1,4 +1,4 @@
-import { PrismaType } from '~~/server/types/prisma-custom';
+import type { PrismaType } from '~~/server/types/prisma-custom';
 import type {
   UpdateRestaurantConfig,
   CreateRestaurantConfig,

@@ -1,7 +1,13 @@
 <template>
   <div class="border-b p-6 break-words whitespace-pre-line last:border-none sm:flex">
-    <BaseText as="h2" class="w-fit pb-8 md:w-1/3 md:pb-0">
-      <a title="Gå till restaurangens hemsida" :href="restaurant.homeUrl">
+    <BaseText
+      as="h2"
+      class="w-fit pb-8 md:w-1/3 md:pb-0"
+    >
+      <a
+        title="Gå till restaurangens hemsida"
+        :href="restaurant.homeUrl"
+      >
         {{ restaurant.name }}
       </a>
     </BaseText>
@@ -16,7 +22,11 @@
         />
       </ul>
 
-      <ul v-if="restaurant.weeklySpecials.length > 0" id="weekly-specials-list" class="pt-6">
+      <ul
+        v-if="restaurant.weeklySpecials.length > 0"
+        id="weekly-specials-list"
+        class="pt-6"
+      >
         <LunchWeekly
           v-for="weeklySpecial in restaurant.weeklySpecials"
           :key="weeklySpecial.type"

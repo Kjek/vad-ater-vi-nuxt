@@ -20,15 +20,6 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: '2025-01-15',
-
-  eslint: {
-    config: {
-      stylistic: {
-        commaDangle: 'never',
-        braceStyle: '1tbs',
-      },
-    },
-  },
   typescript: {
     tsConfig: {
       include: ['types/**/*.d.ts'],
@@ -39,6 +30,17 @@ export default defineNuxtConfig({
     enableGlobalAppMiddleware: true, // optional, adds built-in route protection
     session: {
       basePath: '/api/auth', // <-- important!
+    },
+  },
+
+  eslint: {
+    config: {
+      stylistic: {
+        commaDangle: 'only-multiline',
+        braceStyle: '1tbs',
+        semi: true,
+        arrowParens: true,
+      },
     },
   },
 });
