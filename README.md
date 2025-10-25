@@ -1,60 +1,53 @@
-# Nuxt Starter Template
+# Vad äter vi? ![](https://github.com/Kjek/vad-ater-vi/actions/workflows/preview.yml/badge.svg) ![](https://github.com/Kjek/vad-ater-vi/actions/workflows/production.yml/badge.svg)
 
-[![Nuxt UI](https://img.shields.io/badge/Made%20with-Nuxt%20UI-00DC82?logo=nuxt&labelColor=020420)](https://ui.nuxt.com)
+En full-stack sida i [Nuxt](https://nuxt.com/), [Prisma](https://prisma.io) för databashantering, [NuxtAuth](https://github.com/sidebase/nuxt-auth) för autentisering, [Nuxt UI](https://ui.nuxt.com) och [Tailwind CSS](https://tailwindcss.com) för styling.
 
-Use this template to get started with [Nuxt UI](https://ui.nuxt.com) quickly.
+![](https://badges.aleen42.com/src/typescript.svg) ![](https://badges.aleen42.com/src/vue.svg) ![](https://badges.aleen42.com/src/tailwindcss.svg) [![badges](https://badges.aleen42.com/src/buymeacoffee.svg)](https://www.buymeacoffee.com/kjek)
 
-- [Live demo](https://starter-template.nuxt.dev/)
-- [Documentation](https://ui.nuxt.com/docs/getting-started/installation/nuxt)
+## Innehålsförtäckning
 
-<a href="https://starter-template.nuxt.dev/" target="_blank">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://ui.nuxt.com/assets/templates/nuxt/starter-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="https://ui.nuxt.com/assets/templates/nuxt/starter-light.png">
-    <img alt="Nuxt Starter Template" src="https://ui.nuxt.com/assets/templates/nuxt/starter-light.png">
-  </picture>
-</a>
+- [Installation](#installation)
+- [Live](#live)
+- [Omnämningar](#omnämningar)
 
-> The starter template for Vue is on https://github.com/nuxt-ui-templates/starter-vue.
+## Installation
 
-## Quick Start
-
-```bash [Terminal]
-npm create nuxt@latest -- -t github:nuxt-ui-templates/starter
-```
-
-## Deploy your own
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-name=starter&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fstarter&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Fstarter-dark.png&demo-url=https%3A%2F%2Fstarter-template.nuxt.dev%2F&demo-title=Nuxt%20Starter%20Template&demo-description=A%20minimal%20template%20to%20get%20started%20with%20Nuxt%20UI.)
-
-## Setup
-
-Make sure to install the dependencies:
+1. Klona repot:
 
 ```bash
+git clone https://github.com/Kjek/vad-ater-vi-nuxt.git
+```
+
+2. Installera dependencies:
+
+```bash
+cd path/to/project/folder
 pnpm install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+3. Skapa .env och sätt upp miljövariabler
 
 ```bash
+Kolla upp .env.example för vilka variabler som behövs
+```
+
+4. Snurra igång stacken:
+
+```
 pnpm dev
 ```
 
-## Production
+Gå till `localhost:3000`
 
-Build the application for production:
+## Live
 
-```bash
-pnpm build
-```
+Gå hit för att se sidan live: [https://www.vadätervi.nu/](https://www.vadätervi.nu/)
 
-Locally preview production build:
+## Omnämningar
 
-```bash
-pnpm preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- [Nuxt](https://nuxt.com)
+- [NuxtAuth](https://github.com/sidebase/nuxt-auth)
+- [Prisma](https://prisma.io)
+- [Tailwind CSS](https://tailwindcss.com)
+- [Nuxt UI](https://ui.nuxt.com)
+- [Nuxt Icon](https://github.com/nuxt/icon)
