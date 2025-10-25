@@ -1,0 +1,44 @@
+// https://nuxt.com/docs/api/configuration/nuxt-config
+export default defineNuxtConfig({
+  modules: [
+    '@nuxt/eslint',
+    '@nuxt/ui',
+    '@nuxt/test-utils',
+    '@pinia/nuxt',
+    '@prisma/nuxt',
+    '@sidebase/nuxt-auth',
+  ],
+
+  devtools: {
+    enabled: true,
+  },
+
+  css: ['~/assets/css/main.css'],
+
+  routeRules: {
+    '/': { prerender: true },
+  },
+
+  compatibilityDate: '2025-01-15',
+
+  eslint: {
+    config: {
+      stylistic: {
+        commaDangle: 'never',
+        braceStyle: '1tbs',
+      },
+    },
+  },
+  typescript: {
+    tsConfig: {
+      include: ['types/**/*.d.ts'],
+    },
+  },
+  auth: {
+    origin: process.env.AUTH_ORIGIN || 'http://localhost:3000/api/auth',
+    enableGlobalAppMiddleware: true, // optional, adds built-in route protection
+    session: {
+      basePath: '/api/auth', // <-- important!
+    },
+  },
+});

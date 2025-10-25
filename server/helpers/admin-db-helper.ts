@@ -1,0 +1,90 @@
+import { PrismaType } from '~~/server/types/prisma-custom';
+import type {
+  UpdateRestaurantConfig,
+  CreateRestaurantConfig,
+} from '~~/server/types/restaurant-config';
+import { scrapeNewData } from './scraper-helper';
+
+export const getRestaurantConfig = async (prisma: PrismaType, restaurantId: string) => {
+  const restaurant = await prisma.restaurantConfig.findUniqueOrThrow({
+    where: {
+      restaurantId: restaurantId,
+    },
+  });
+  return {
+    ...restaurant,
+    lunchRegex: restaurant.lunchRegex?.toRegExp(),
+    weeklyRegex: restaurant.weeklyRegex?.toRegExp(),
+  };
+};
+
+export const getAllRestaurantConfigsMinimal = async (prisma: PrismaType) => {
+  return await prisma.restaurantConfig.findMany({
+    select: { name: true, homeUrl: true, enabled: true },
+  });
+};
+
+export const getAllRestaurantConfigs = async (prisma: PrismaType) => {
+  return await prisma.restaurantConfig.findMany({
+    select: {
+      id: true,
+      name: true,
+      homeUrl: true,
+      lunchUrl: true,
+      lunchRegex: true,
+      weeklyRegex: true,
+      enabled: true,
+      restaurantId: true,
+    },
+  });
+};
+
+export const createRestaurantConfig = async (
+  prisma: PrismaType,
+  createRestaurantConfig: CreateRestaurantConfig
+) => {
+  const { id } = await prisma.restaurant.create({
+    data: {
+      restaurantConfig: {
+        create: {
+          name: createRestaurantConfig.name,
+          homeUrl: createRestaurantConfig.homeUrl,
+          lunchUrl: createRestaurantConfig.lunchUrl,
+          lunchRegex: createRestaurantConfig.lunchRegex,
+          weeklyRegex: createRestaurantConfig.weeklyRegex,
+          enabled: createRestaurantConfig.enabled,
+        },
+      },
+    },
+  });
+
+  await scrapeNewData(prisma, id);
+};
+
+export const updateRestaurantConfig = async (
+  prisma: PrismaType,
+  restaurantId: string,
+  restaurantConfig: UpdateRestaurantConfig
+) => {
+  return await prisma.restaurantConfig.update({
+    where: {
+      restaurantId,
+    },
+    data: {
+      name: restaurantConfig.name,
+      homeUrl: restaurantConfig.homeUrl,
+      lunchUrl: restaurantConfig.lunchUrl,
+      lunchRegex: restaurantConfig.lunchRegex,
+      weeklyRegex: restaurantConfig.weeklyRegex,
+      enabled: restaurantConfig.enabled,
+    },
+  });
+};
+
+export const deleteRestaurantConfig = async (prisma: PrismaType, id: string) => {
+  await prisma.restaurant.delete({
+    where: {
+      id,
+    },
+  });
+};
