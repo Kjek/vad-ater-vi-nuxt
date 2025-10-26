@@ -1,7 +1,7 @@
 import { handleGetRestaurants } from '~~/server/helpers/lunch-menu-helper';
 
 export default defineEventHandler(async () => {
-  const restaurants = await handleGetRestaurants(prisma);
+  const restaurants = await handleGetRestaurants();
 
   return {
     restaurants: restaurants.sort((l, r) => (l.name > r.name ? 1 : -1)),

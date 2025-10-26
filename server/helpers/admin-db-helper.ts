@@ -1,11 +1,10 @@
-import type { PrismaType } from '~~/server/types/prisma-custom';
 import type {
   UpdateRestaurantConfig,
   CreateRestaurantConfig,
 } from '~~/server/types/restaurant-config';
 import { scrapeNewData } from './scraper-helper';
 
-export const getRestaurantConfig = async (prisma: PrismaType, restaurantId: string) => {
+export const getRestaurantConfig = async (restaurantId: string) => {
   const restaurant = await prisma.restaurantConfig.findUniqueOrThrow({
     where: {
       restaurantId: restaurantId,
@@ -18,13 +17,13 @@ export const getRestaurantConfig = async (prisma: PrismaType, restaurantId: stri
   };
 };
 
-export const getAllRestaurantConfigsMinimal = async (prisma: PrismaType) => {
+export const getAllRestaurantConfigsMinimal = async () => {
   return await prisma.restaurantConfig.findMany({
     select: { name: true, homeUrl: true, enabled: true },
   });
 };
 
-export const getAllRestaurantConfigs = async (prisma: PrismaType) => {
+export const getAllRestaurantConfigs = async () => {
   return await prisma.restaurantConfig.findMany({
     select: {
       id: true,
@@ -39,10 +38,7 @@ export const getAllRestaurantConfigs = async (prisma: PrismaType) => {
   });
 };
 
-export const createRestaurantConfig = async (
-  prisma: PrismaType,
-  createRestaurantConfig: CreateRestaurantConfig
-) => {
+export const createRestaurantConfig = async (createRestaurantConfig: CreateRestaurantConfig) => {
   const { id } = await prisma.restaurant.create({
     data: {
       restaurantConfig: {
@@ -58,11 +54,10 @@ export const createRestaurantConfig = async (
     },
   });
 
-  await scrapeNewData(prisma, id);
+  await scrapeNewData(id);
 };
 
 export const updateRestaurantConfig = async (
-  prisma: PrismaType,
   restaurantId: string,
   restaurantConfig: UpdateRestaurantConfig
 ) => {
@@ -81,7 +76,7 @@ export const updateRestaurantConfig = async (
   });
 };
 
-export const deleteRestaurantConfig = async (prisma: PrismaType, id: string) => {
+export const deleteRestaurantConfig = async (id: string) => {
   await prisma.restaurant.delete({
     where: {
       id,

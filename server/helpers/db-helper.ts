@@ -1,7 +1,6 @@
 import type { LunchMenu, WeeklySpecial } from '~/types/lunch-menu';
-import type { PrismaType } from '../types/prisma-custom';
 
-export const getRestaurantNeedsUpdating = async (prisma: PrismaType, id: string) => {
+export const getRestaurantNeedsUpdating = async (id: string) => {
   const restaurant = await prisma.restaurant.findFirst({
     where: {
       id: id,
@@ -15,7 +14,7 @@ export const getRestaurantNeedsUpdating = async (prisma: PrismaType, id: string)
   return { restaurantId: restaurant?.id, updatedAt: restaurant?.updatedAt };
 };
 
-export const deleteMenuAndWeekly = async (prisma: PrismaType, restaurantId: string) => {
+export const deleteMenuAndWeekly = async (restaurantId: string) => {
   await prisma.menu.deleteMany({
     where: {
       restaurantId: restaurantId,
@@ -30,7 +29,6 @@ export const deleteMenuAndWeekly = async (prisma: PrismaType, restaurantId: stri
 };
 
 export const updateRestaurantFood = async (
-  prisma: PrismaType,
   restaurantId: string,
   menu: LunchMenu[],
   weeklySpecials: WeeklySpecial[] = []
@@ -109,7 +107,7 @@ export const updateRestaurantFood = async (
   });
 };
 
-export const getAllRestaurants = async (prisma: PrismaType) => {
+export const getAllRestaurants = async () => {
   return await prisma.restaurant.findMany({
     include: {
       menu: true,
@@ -124,7 +122,7 @@ export const getAllRestaurants = async (prisma: PrismaType) => {
   });
 };
 
-export const findRestaurantByName = async (prisma: PrismaType, name: string) => {
+export const findRestaurantByName = async (name: string) => {
   return await prisma.restaurant.findFirst({
     where: {
       restaurantConfig: {
@@ -139,11 +137,7 @@ export const findRestaurantByName = async (prisma: PrismaType, name: string) => 
   });
 };
 
-export const searchRestaurantByName = async (
-  prisma: PrismaType,
-  searchText: string,
-  limit?: number
-) => {
+export const searchRestaurantByName = async (searchText: string, limit?: number) => {
   return await prisma.restaurant.findMany({
     include: {
       menu: true,

@@ -1,44 +1,40 @@
 import { isLunchMenus, isWeekMenu } from '~/types/lunch-menu';
-import type { PrismaType } from '../types/prisma-custom';
 import { getRestaurantConfig } from './admin-db-helper';
 import { deleteMenuAndWeekly, updateRestaurantFood } from './db-helper';
 import genericWebScraper from '../scrapers/generic';
 
-export const scrapeNewData = async (prisma: PrismaType, restaurantId: string) => {
-  const { lunchUrl, lunchRegex, weeklyRegex, enabled } = await getRestaurantConfig(
-    prisma,
-    restaurantId
-  );
+export const scrapeNewData = async (restaurantId: string) => {
+  const { lunchUrl, lunchRegex, weeklyRegex, enabled } = await getRestaurantConfig(restaurantId);
   if (enabled && lunchUrl) {
     const menu = await genericWebScraper(lunchUrl, lunchRegex, weeklyRegex);
     if (isLunchMenus(menu)) {
-      await updateRestaurantFood(prisma, restaurantId, menu);
+      await updateRestaurantFood(restaurantId, menu);
     } else if (isWeekMenu(menu)) {
-      await updateRestaurantFood(prisma, restaurantId, menu.lunchWeek, menu.weeklySpecials);
+      await updateRestaurantFood(restaurantId, menu.lunchWeek, menu.weeklySpecials);
     }
   }
 };
 
-export const handleScraper = async (prisma: PrismaType, restaurantId: string) => {
-  const { enabled } = await getRestaurantConfig(prisma, restaurantId);
+export const handleScraper = async (restaurantId: string) => {
+  const { enabled } = await getRestaurantConfig(restaurantId);
   if (enabled) {
-    await deleteMenuAndWeekly(prisma, restaurantId);
-    await scrapeNewData(prisma, restaurantId);
+    await deleteMenuAndWeekly(restaurantId);
+    await scrapeNewData(restaurantId);
   }
 };
 
-export const handleLunchScrapers = async (prisma: PrismaType) => {
+export const handleLunchScrapers = async () => {
   const restaurants = await prisma.restaurantConfig.findMany({
     select: {
       restaurantId: true,
     },
   });
   console.log(restaurants);
-  await Promise.all(restaurants.map(({ restaurantId }) => handleScraper(prisma, restaurantId)));
+  await Promise.all(restaurants.map(({ restaurantId }) => handleScraper(restaurantId)));
 };
 
-export const handleDebugScraper = async (prisma: PrismaType, restaurantId: string) => {
-  const { lunchUrl, lunchRegex, weeklyRegex } = await getRestaurantConfig(prisma, restaurantId);
+export const handleDebugScraper = async (restaurantId: string) => {
+  const { lunchUrl, lunchRegex, weeklyRegex } = await getRestaurantConfig(restaurantId);
   if (lunchUrl) {
     return await genericWebScraper(lunchUrl, lunchRegex, weeklyRegex, true);
   }

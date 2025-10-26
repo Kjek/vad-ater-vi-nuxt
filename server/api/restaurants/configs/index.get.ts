@@ -9,6 +9,6 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 401, statusMessage: 'Unauthorized' });
   }
 
-  const allRestaurantConfigs = (await getAllRestaurantConfigs(prisma)) as RestaurantConfig[];
+  const allRestaurantConfigs = (await getAllRestaurantConfigs()) as RestaurantConfig[];
   return allRestaurantConfigs;
 });
