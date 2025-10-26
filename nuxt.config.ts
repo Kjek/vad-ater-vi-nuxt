@@ -31,7 +31,6 @@ export default defineNuxtConfig({
     externals: {
       inline: ['unhead'],
     },
-    preset: process.env.VERCEL ? 'vercel' : undefined,
   },
 
   vite: {
@@ -50,9 +49,9 @@ export default defineNuxtConfig({
 
   auth: {
     origin: process.env.AUTH_ORIGIN || 'http://localhost:3000/api/auth',
-    enableGlobalAppMiddleware: true, // optional, adds built-in route protection
+    enableGlobalAppMiddleware: true,
     session: {
-      basePath: '/api/auth', // <-- important!
+      basePath: '/api/auth',
     },
   },
 
