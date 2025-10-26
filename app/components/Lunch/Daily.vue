@@ -1,5 +1,5 @@
 <template>
-  <li class="pb-6 last:pb-0">
+  <li>
     <BaseText as="h3">
       {{ day }}
     </BaseText>

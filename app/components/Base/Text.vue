@@ -1,7 +1,7 @@
 <template>
   <component
     :is="tag"
-    :class="cn(tagClasses, attrs.class as ClassValue)"
+    :class="cn(tagClasses, typeClasses, attrs.class as ClassValue)"
   >
     <slot />
   </component>
@@ -15,7 +15,7 @@ interface Props {
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
   type?: 'normal' | 'info' | 'error';
 }
-const { as } = defineProps<Props>();
+const { as, type } = defineProps<Props>();
 defineOptions({ inheritAttrs: false });
 
 const attrs = useAttrs();
@@ -38,6 +38,17 @@ const tagClasses = computed(() => {
     case 'span':
     default:
       return 'text-lg ';
+  }
+});
+
+const typeClasses = computed(() => {
+  switch (type) {
+    case 'info':
+      return 'text-blue-700 dark:text-blue-500';
+    case 'error':
+      return 'text-red-700 dark:text-red-500';
+    default:
+      return '';
   }
 });
 </script>

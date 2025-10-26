@@ -35,6 +35,9 @@ export const getAllRestaurantConfigs = async () => {
       enabled: true,
       restaurantId: true,
     },
+    orderBy: {
+      name: 'asc',
+    },
   });
 };
 

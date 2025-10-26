@@ -12,7 +12,10 @@
       </a>
     </BaseText>
     <div class="sm:w-2/3 sm:grow">
-      <ul>
+      <UPageList
+        class="gap-4"
+        as="ul"
+      >
         <LunchDaily
           v-for="lunch in restaurant.menu"
           v-show="isDaySelected(lunch.day)"
@@ -20,12 +23,30 @@
           :day="lunch.day"
           :food="lunch.food"
         />
-      </ul>
+        <li
+          v-if="dayIsMissing"
+          :key="`${restaurant.name}-error`"
+        >
+          <BaseText
+            variant="h3"
+            type="error"
+          >
+            Fel vid hämtning av menyer gå till restaurangens hemsida istället:
+          </BaseText>
+          <ULink
+            :href="restaurant.homeUrl"
+            class="text-red-700 underline dark:text-red-500"
+          >
+            {{ restaurant.homeUrl }}
+          </ULink>
+        </li>
+      </UPageList>
 
-      <ul
+      <UPageList
         v-if="restaurant.weeklySpecials.length > 0"
         id="weekly-specials-list"
-        class="pt-6"
+        class="gap-4 pt-6"
+        as="ul"
       >
         <LunchWeekly
           v-for="weeklySpecial in restaurant.weeklySpecials"
@@ -33,7 +54,7 @@
           :type="weeklySpecial.type"
           :food="weeklySpecial.food"
         />
-      </ul>
+      </UPageList>
     </div>
   </div>
 </template>
@@ -47,9 +68,14 @@ interface Props {
   restaurant: Restaurant;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
-const { isDaySelected } = useFilterStore();
+const filterStore = useFilterStore();
+const { daysSelected } = storeToRefs(filterStore);
+const { isDaySelected } = filterStore;
+const dayIsMissing = computed(
+  () => !props.restaurant.menu.some((menu) => menu.day === daysSelected.value[0])
+);
 </script>
 
 <style scoped></style>
