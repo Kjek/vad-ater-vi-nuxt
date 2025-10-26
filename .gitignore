@@ -23,4 +23,8 @@ logs
 .env.*
 !.env.example
 
-generated/prisma
+# Prisma
+generated
+
+# Vercel
+.vercel

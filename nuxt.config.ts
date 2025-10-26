@@ -31,6 +31,7 @@ export default defineNuxtConfig({
     externals: {
       inline: ['unhead'],
     },
+    preset: 'vercel',
   },
 
   vite: {
