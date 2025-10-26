@@ -22,13 +22,10 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-01-15',
 
   vite: {
-    ssr: {
-      // Prevent Vite from trying to bundle @prisma/client for the client
-      noExternal: ['@prisma/client'],
-    },
-    optimizeDeps: {
-      // Prevent Vite from pre-bundling @prisma/client
-      exclude: ['@prisma/client'],
+    resolve: {
+      alias: {
+        '.prisma/client/index-browser': './node_modules/.prisma/client/index-browser.js',
+      },
     },
   },
 
