@@ -12,7 +12,7 @@
       <UColorModeButton />
 
       <UButton
-        to="https://github.com/Kjek/vad-ater-vi"
+        to="https://github.com/Kjek/vad-ater-vi-nuxt"
         target="_blank"
         icon="i-simple-icons-github"
         aria-label="GitHub"
