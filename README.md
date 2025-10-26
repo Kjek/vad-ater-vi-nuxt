@@ -1,4 +1,4 @@
-# Vad äter vi? ![](https://github.com/Kjek/vad-ater-vi/actions/workflows/preview.yml/badge.svg) ![](https://github.com/Kjek/vad-ater-vi/actions/workflows/production.yml/badge.svg)
+# Vad äter vi? ![](https://github.com/Kjek/vad-ater-vi-nuxt/actions/workflows/preview.yml/badge.svg) ![](https://github.com/Kjek/vad-ater-vi-nuxt/actions/workflows/production.yml/badge.svg)
 
 En full-stack sida i [Nuxt](https://nuxt.com/), [Prisma](https://prisma.io) för databashantering, [NuxtAuth](https://github.com/sidebase/nuxt-auth) för autentisering, [Nuxt UI](https://ui.nuxt.com) och [Tailwind CSS](https://tailwindcss.com) för styling.
 
