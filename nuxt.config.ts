@@ -20,11 +20,24 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: '2025-01-15',
+
+  vite: {
+    ssr: {
+      // Prevent Vite from trying to bundle @prisma/client for the client
+      noExternal: ['@prisma/client'],
+    },
+    optimizeDeps: {
+      // Prevent Vite from pre-bundling @prisma/client
+      exclude: ['@prisma/client'],
+    },
+  },
+
   typescript: {
     tsConfig: {
       include: ['types/**/*.d.ts'],
     },
   },
+
   auth: {
     origin: process.env.AUTH_ORIGIN || 'http://localhost:3000/api/auth',
     enableGlobalAppMiddleware: true, // optional, adds built-in route protection
