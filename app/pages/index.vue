@@ -27,4 +27,5 @@ import { useRestaurantsStore } from '~/stores/use-restaurants';
 
 const restaurantsStore = useRestaurantsStore();
 const { restaurants } = storeToRefs(restaurantsStore);
+defineOgImageComponent('NuxtSeo');
 </script>

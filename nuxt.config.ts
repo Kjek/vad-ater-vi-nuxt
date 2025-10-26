@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@prisma/nuxt',
     '@sidebase/nuxt-auth',
+    '@nuxtjs/seo',
   ],
 
   devtools: {
@@ -14,6 +15,11 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
+
+  site: {
+    url: 'https://www.xn--vadtervi-2za.nu/',
+    name: 'Vad Äter Vi',
+  },
 
   routeRules: {
     '/': { prerender: true },
@@ -52,5 +58,10 @@ export default defineNuxtConfig({
         arrowParens: true,
       },
     },
+  },
+
+  robots: {
+    allow: ['/'],
+    disallow: ['/login', '/admin'],
   },
 });
