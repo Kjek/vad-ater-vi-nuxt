@@ -29,7 +29,7 @@ export default defineNuxtConfig({
 
   nitro: {
     externals: {
-      inline: ['unhead'],
+      inline: ['unhead', '@prisma/client'],
     },
     preset: 'vercel',
   },
