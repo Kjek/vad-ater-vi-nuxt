@@ -5,9 +5,23 @@
 
 version: 2
 updates:
-  - package-ecosystem: 'pnpm' # See documentation for possible values
-    directory: '/' # Location of package manifests
+  - package-ecosystem: 'pnpm'
+    directory: '/'
     schedule:
-      interval: 'weekly'
+      interval: 'monthly'
+      day: 'sunday'
     target-branch: 'develop'
-    open-pull-requests-limit: 20
+    commit-message:
+      prefix: 'build'
+      include: 'scope'
+    groups:
+      all-dependencies:
+        patterns:
+          - '*'
+    ignore:
+      - dependency-name: 'nuxt'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'vite'
+        update-types: ['version-update:semver-major']
+    open-pull-requests-limit: 5 # Avoid Dependabot flooding your PR list
+    rebase-strategy: 'auto'
