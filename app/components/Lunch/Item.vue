@@ -33,10 +33,7 @@
           >
             Fel vid hämtning av menyer gå till restaurangens hemsida istället:
           </BaseText>
-          <ULink
-            :href="restaurant.homeUrl"
-            class="text-red-700 underline dark:text-red-500"
-          >
+          <ULink :to="restaurant.homeUrl">
             {{ restaurant.homeUrl }}
           </ULink>
         </li>

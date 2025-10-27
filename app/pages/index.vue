@@ -4,7 +4,7 @@
     <UPageList
       v-if="restaurants.length > 0"
       as="ul"
-      class="gap-4"
+      class="gap-4 pb-32 md:pb-8"
     >
       <UPageCard
         v-for="restaurant in restaurants"
