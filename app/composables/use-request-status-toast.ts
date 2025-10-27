@@ -30,4 +30,5 @@ export const useRequestStatusToast = (
       showToast(newStatus, error.value, description);
     }
   });
+  showToast(status.value, error.value, description);
 };
