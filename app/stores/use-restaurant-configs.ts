@@ -30,10 +30,8 @@ export const useRestaurantConfigsStore = defineStore('restaurant-config', () => 
       }
     );
 
-    console.log(data.value);
-
     await refresh();
-    return { status, error };
+    return { data, status, error };
   };
 
   const deleteRestaurantConfig = async (id: string) => {

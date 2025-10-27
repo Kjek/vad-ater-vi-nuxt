@@ -29,7 +29,6 @@ export const handleLunchScrapers = async () => {
       restaurantId: true,
     },
   });
-  console.log(restaurants);
   await Promise.all(restaurants.map(({ restaurantId }) => handleScraper(restaurantId)));
 };
 
