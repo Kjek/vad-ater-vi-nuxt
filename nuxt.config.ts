@@ -31,12 +31,13 @@ export default defineNuxtConfig({
     externals: {
       inline: ['unhead'],
     },
+    preset: process.env.VERCEL ? 'vercel' : undefined,
   },
 
   vite: {
     resolve: {
       alias: {
-        '.prisma/client/index-browser': './node_modules/@prisma/client/index-browser.js',
+        '.prisma/client/index-browser': './node_modules/.prisma/client/index-browser.js',
       },
     },
   },
