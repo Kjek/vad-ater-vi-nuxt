@@ -25,6 +25,7 @@
 <script lang="ts" setup>
 const { signOut } = useAuth();
 const onLogout = async () => {
-  await signOut();
+  await signOut({ redirect: false });
+  navigateTo('/login');
 };
 </script>
