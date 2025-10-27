@@ -10,10 +10,6 @@ export interface Restaurant {
   homeUrl?: string;
 }
 
-export interface Restaurants {
-  restaurants: Restaurant[];
-}
-
 export interface WeekMenu {
   lunchWeek: LunchMenu[];
   weeklySpecials: WeeklySpecial[];

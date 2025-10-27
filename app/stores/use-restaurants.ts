@@ -1,9 +1,9 @@
 import { defineStore, storeToRefs } from 'pinia';
-import type { Restaurants } from '~/types/lunch-menu';
+import type { Restaurant } from '~/types/lunch-menu';
 import { useSearchStore } from './use-search';
 
 export const useRestaurantsStore = defineStore('restaurants', () => {
-  const { data, status } = useFetch<Restaurants>('/api/restaurants');
+  const { data, status } = useFetch<Restaurant[]>('/api/restaurants');
 
   const searchStore = useSearchStore();
   const { searchQuery } = storeToRefs(searchStore);
@@ -12,12 +12,11 @@ export const useRestaurantsStore = defineStore('restaurants', () => {
     if (searchQuery && searchQuery.value) {
       const query = searchQuery.value;
       return (
-        data.value?.restaurants.filter((restaurant) =>
-          restaurant.name.toLocaleLowerCase().startsWith(query)
-        ) ?? []
+        data.value?.filter((restaurant) => restaurant.name.toLocaleLowerCase().startsWith(query)) ??
+        []
       );
     } else {
-      return data.value?.restaurants ?? [];
+      return data.value ?? [];
     }
   });
 
