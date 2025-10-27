@@ -10,10 +10,9 @@ export const useRestaurantsStore = defineStore('restaurants', () => {
 
   const restaurants = computed(() => {
     if (searchQuery && searchQuery.value) {
-      const query = searchQuery.value;
+      const query = searchQuery.value.toLowerCase();
       return (
-        data.value?.filter((restaurant) => restaurant.name.toLocaleLowerCase().startsWith(query)) ??
-        []
+        data.value?.filter((restaurant) => restaurant.name.toLowerCase().startsWith(query)) ?? []
       );
     } else {
       return data.value ?? [];
