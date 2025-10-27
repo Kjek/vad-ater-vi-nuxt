@@ -55,6 +55,7 @@ const onSignUp = async (creds: CreateAccount) => {
     headers: {
       'Content-Type': 'application/json',
     },
+    server: false,
   });
   useRequestStatusToast(status, error, 'The account has been created.');
   if (status.value === 'success') {

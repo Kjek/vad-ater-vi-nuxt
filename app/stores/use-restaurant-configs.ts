@@ -6,7 +6,10 @@ import type {
 import type { RestaurantConfig } from '@prisma/client';
 
 export const useRestaurantConfigsStore = defineStore('restaurant-config', () => {
-  const { data, status, error, refresh } = useFetch<RestaurantConfig[]>('/api/restaurants/configs');
+  const { data, status, error, refresh } = useFetch<RestaurantConfig[]>(
+    '/api/restaurants/configs',
+    { server: false }
+  );
 
   const createNewRestaurant = async (payload: CreateRestaurantConfig) => {
     const { status, error } = await useFetch<CreateRestaurantConfig>('/api/restaurants/configs', {

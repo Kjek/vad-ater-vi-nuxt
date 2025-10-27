@@ -104,8 +104,8 @@ import { sweDays } from '~/types/swedish-days';
 const filterStore = useFilterStore();
 const { isAllDaysSelected } = storeToRefs(filterStore);
 const { toggleDay, toggleAll, isDaySelected } = filterStore;
-const searchStore = useSearchStore();
-const { searchQuery } = storeToRefs(searchStore);
+const restaurantsStore = useRestaurantsStore();
+const { searchQuery } = storeToRefs(restaurantsStore);
 
 const week = computed(() => `v.${new Date().getWeek()}`);
 </script>

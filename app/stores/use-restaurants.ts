@@ -1,23 +1,20 @@
-import { defineStore, storeToRefs } from 'pinia';
+import { defineStore } from 'pinia';
 import type { Restaurant } from '~/types/lunch-menu';
-import { useSearchStore } from './use-search';
 
 export const useRestaurantsStore = defineStore('restaurants', () => {
-  const { data, status } = useFetch<Restaurant[]>('/api/restaurants');
+  const { data, status } = useFetch<Restaurant[]>('/api/restaurants', { server: false });
+  const searchQuery = ref<string>();
 
-  const searchStore = useSearchStore();
-  const { searchQuery } = storeToRefs(searchStore);
+  const restaurants = computed<Restaurant[]>(() => {
+    const all = data.value ?? [];
 
-  const restaurants = computed(() => {
-    if (searchQuery && searchQuery.value) {
-      const query = searchQuery.value.toLowerCase();
-      return (
-        data.value?.filter((restaurant) => restaurant.name.toLowerCase().startsWith(query)) ?? []
-      );
-    } else {
-      return data.value ?? [];
+    if (!searchQuery.value) {
+      return all;
     }
+
+    const query = searchQuery.value.toLowerCase();
+    return all.filter((r) => r.name.toLowerCase().startsWith(query));
   });
 
-  return { restaurants, status };
+  return { restaurants, status, searchQuery };
 });
