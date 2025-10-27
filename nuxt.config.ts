@@ -5,7 +5,6 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/test-utils',
     '@pinia/nuxt',
-    '@prisma/nuxt',
     '@sidebase/nuxt-auth',
     '@nuxtjs/seo',
   ],
@@ -32,14 +31,6 @@ export default defineNuxtConfig({
       inline: ['unhead'],
     },
     preset: process.env.VERCEL ? 'vercel' : undefined,
-  },
-
-  vite: {
-    resolve: {
-      alias: {
-        '.prisma/client/index-browser': './node_modules/.prisma/client/index-browser.js',
-      },
-    },
   },
 
   typescript: {
