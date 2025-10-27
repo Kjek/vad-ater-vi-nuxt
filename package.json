@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "pnpm dlx prisma generate && nuxt build",
+    "build": "nuxt build",
     "vercel-build": "pnpm dlx prisma generate && pnpm dlx prisma migrate deploy && nuxt build",
     "dev": "nuxt dev",
     "preview": "nuxt preview",
@@ -11,7 +11,8 @@
     "test": "vitest",
     "lint": "eslint .",
     "typecheck": "nuxt typecheck",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prisma:generate": "pnpm dlx prisma generate"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.70",
