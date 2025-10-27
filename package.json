@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "pnpm dlx prisma generate & nuxt build",
+    "build": "pnpm dlx prisma generate && nuxt build",
     "vercel-build": "pnpm dlx prisma generate && pnpm dlx prisma migrate deploy && nuxt build",
     "dev": "nuxt dev",
     "preview": "nuxt preview",
