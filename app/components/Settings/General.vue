@@ -18,6 +18,8 @@
         :label="label"
         color="neutral"
         variant="outline"
+        :loading="isLoading"
+        :disabled="isLoading"
         @click="onClick"
       />
     </template>
@@ -25,18 +27,23 @@
 </template>
 
 <script lang="ts" setup>
+import type { AsyncDataRequestStatus } from '#app';
+
 interface Props {
   title?: string;
   label?: string;
+  status?: AsyncDataRequestStatus;
 }
 
 interface Emits {
   (e: 'click'): void;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
 const onClick = () => {
   emit('click');
 };
+
+const isLoading = computed(() => props.status === 'pending');
 </script>

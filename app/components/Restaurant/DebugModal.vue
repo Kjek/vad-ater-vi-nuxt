@@ -32,6 +32,6 @@ const props = defineProps<Props>();
 const { data, status, error, refresh } = useDebugData(props.restaurantId);
 const onDebugClick = async () => {
   await refresh();
-  useRequestStatusToast(status, error, 'The debug was fetched successfully.');
+  useRequestStatusToast(status, error);
 };
 </script>

@@ -97,19 +97,9 @@ defineShortcuts({
 const restaurantConfigsStore = useRestaurantConfigsStore();
 const { restaurantConfigs } = storeToRefs(restaurantConfigsStore);
 const { updateRestaurantConfig, deleteRestaurantConfig } = restaurantConfigsStore;
-const state = reactive<RestaurantConfig | Partial<RestaurantConfig>>(
-  restaurantConfigs.value?.find((conf) => conf.restaurantId === props.restaurantId) ?? {}
-);
-
-const onUpdateRestaurantConfig = async (restaurantId: string, payload: UpdateRestaurantConfig) => {
-  const { status, error } = await updateRestaurantConfig(restaurantId, payload);
-  useRequestStatusToast(status, error, 'The restaurant config has been updated.');
-};
-
-const onDeleteRestaurantConfig = async (restaurantId: string) => {
-  const { status, error } = await deleteRestaurantConfig(restaurantId);
-  useRequestStatusToast(status, error, 'The restaurant config has been deleted.');
-};
+const state = reactive<RestaurantConfig | Partial<RestaurantConfig>>({
+  ...(restaurantConfigs.value?.find((conf) => conf.restaurantId === props.restaurantId) ?? {}),
+});
 
 const toggleEnabled = () => {
   state.enabled = !state.enabled;
@@ -125,14 +115,14 @@ const validate = (state: UpdateRestaurantConfig): FormError[] => {
 
 const onSubmit = async () => {
   if (state.restaurantId) {
-    await onUpdateRestaurantConfig(state.restaurantId, state as UpdateRestaurantConfig);
+    await updateRestaurantConfig(state.restaurantId, state as UpdateRestaurantConfig);
     open.value = !open.value;
   }
 };
 
 const onDelete = async () => {
   if (state.restaurantId) {
-    await onDeleteRestaurantConfig(state.restaurantId);
+    await deleteRestaurantConfig(state.restaurantId);
     open.value = !open.value;
   }
 };

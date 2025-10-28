@@ -12,12 +12,13 @@
         <SettingsGeneral
           title="Re-scrape all restaurants"
           label="Re-scrape all"
+          :status="requestsStatuses['scrape-all']"
           @click="onScrapeAll"
         />
       </UPageCard>
       <UPageCard
         v-for="config in restaurantConfigs"
-        :key="config.name"
+        :key="config.restaurantId"
         class="bg-neutral-50 dark:bg-neutral-950"
         as="li"
       >
@@ -25,6 +26,7 @@
           :restaurant-id="config.restaurantId"
           :name="config.name"
           :enabled="config.enabled"
+          :status="requestsStatuses[`scrape-${config.restaurantId}`]"
           @scrape="onScrapeSingle"
           @activate="onActivateRestaurant"
         />
@@ -35,7 +37,9 @@
 </template>
 
 <script lang="ts" setup>
+import type { AsyncDataRequestStatus } from '#app';
 import { storeToRefs } from 'pinia';
+import { useRequestStatusMap } from '~/composables/use-request-status-map';
 import type {
   CreateRestaurantConfig,
   UpdateRestaurantConfig,
@@ -50,24 +54,26 @@ const restaurantConfigsStore = useRestaurantConfigsStore();
 const { restaurantConfigs } = storeToRefs(restaurantConfigsStore);
 const { createNewRestaurant, updateRestaurantConfig } = restaurantConfigsStore;
 
+const { map: requestsStatuses, setStatus } = useRequestStatusMap();
+
 const onCreateNewRestaurant = async (payload: CreateRestaurantConfig) => {
-  const { status, error } = await createNewRestaurant(payload);
-  useRequestStatusToast(status, error, 'The restaurant has been created.');
+  await createNewRestaurant(payload);
 };
 
 const onScrapeAll = async () => {
-  const { status, error } = await useFetch('/api/scrapers');
-  useRequestStatusToast(status, error, 'The scrapers ran successfully.');
+  setStatus('scrape-all', 'pending');
+  const { status } = await useToastFetch('/api/scrapers');
+  setStatus('scrape-all', status.value);
 };
 
 const onScrapeSingle = async (restaurantId: string) => {
-  const { status, error } = await useFetch(`/api/scrapers/${restaurantId}`);
-  useRequestStatusToast(status, error, 'The scraper ran successfully.');
+  setStatus(`scrape-${restaurantId}`, 'pending');
+  const { status } = await useToastFetch(`/api/scrapers/${restaurantId}`);
+  setStatus(`scrape-${restaurantId}`, status.value);
 };
 
 const onActivateRestaurant = async (restaurantId: string, updateConfig: UpdateRestaurantConfig) => {
-  const { status, error } = await updateRestaurantConfig(restaurantId, updateConfig);
-  useRequestStatusToast(status, error, 'Activated restaurant successfully.');
+  await updateRestaurantConfig(restaurantId, updateConfig);
 };
 </script>
 

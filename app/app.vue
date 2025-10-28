@@ -20,10 +20,11 @@ useSeoMeta({
   twitterImage: 'https://ui.nuxt.com/assets/templates/nuxt/starter-light.png',
   twitterCard: 'summary_large_image',
 });
+const toaster = { expand: false };
 </script>
 
 <template>
-  <UApp>
+  <UApp :toaster="toaster">
     <NuxtLayout></NuxtLayout>
 
     <UMain>

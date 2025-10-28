@@ -42,7 +42,7 @@ export const getAllRestaurantConfigs = async () => {
 };
 
 export const createRestaurantConfig = async (createRestaurantConfig: CreateRestaurantConfig) => {
-  const { id } = await prisma.restaurant.create({
+  const restaurant = await prisma.restaurant.create({
     data: {
       restaurantConfig: {
         create: {
@@ -55,9 +55,11 @@ export const createRestaurantConfig = async (createRestaurantConfig: CreateResta
         },
       },
     },
+    include: { restaurantConfig: true },
   });
 
-  await scrapeNewData(id);
+  await scrapeNewData(restaurant.id);
+  return restaurant.restaurantConfig;
 };
 
 export const updateRestaurantConfig = async (

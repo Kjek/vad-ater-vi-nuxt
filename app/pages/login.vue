@@ -49,15 +49,10 @@ const onLogin = async (username: string, password: string) => {
 };
 
 const onSignUp = async (creds: CreateAccount) => {
-  const { status, error } = await useFetch('/api/auth/signup', {
+  const { status } = await useToastFetch('/api/auth/signup', {
     method: 'POST',
     body: creds,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    server: false,
   });
-  useRequestStatusToast(status, error, 'The account has been created.');
   if (status.value === 'success') {
     open.value = false;
   }

@@ -9,5 +9,5 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 401, statusMessage: 'Unauthorized' });
   }
   const body = await readBody<CreateRestaurantConfig>(event);
-  await createRestaurantConfig(body);
+  return await createRestaurantConfig(body);
 });
