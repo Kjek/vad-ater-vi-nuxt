@@ -2,6 +2,7 @@ declare global {
   interface Date {
     getWeek(): number;
     isPastSevenUTC(): boolean;
+    today(): string;
   }
 
   interface String {

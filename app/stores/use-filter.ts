@@ -2,8 +2,8 @@ import { defineStore } from 'pinia';
 import { sweDays } from '~/types/swedish-days';
 
 export const useFilterStore = defineStore('filter', () => {
-  const today = new Date().getDay() - 1;
-  const daysSelected = ref<string[]>([sweDays[today] ?? 'Måndag']);
+  const today = new Date().today();
+  const daysSelected = ref<string[]>([today]);
   const isAllDaysSelected = ref<boolean>(false);
 
   const filterDay = (day: string) => {
@@ -12,7 +12,7 @@ export const useFilterStore = defineStore('filter', () => {
 
   const toggleAll = () => {
     if (isAllDaysSelected.value) {
-      daysSelected.value = [sweDays[today] ?? 'Måndag'];
+      daysSelected.value = [today];
     } else {
       daysSelected.value = sweDays.map((day) => day);
     }

@@ -1,3 +1,5 @@
+import { sweDays } from '~/types/swedish-days';
+
 export default defineNuxtPlugin(() => {
   Date.prototype.getWeek = function () {
     const weekOne = new Date(this.getFullYear(), 0, 4);
@@ -6,5 +8,10 @@ export default defineNuxtPlugin(() => {
 
   Date.prototype.isPastSevenUTC = function () {
     return this.getUTCHours() >= 7;
+  };
+
+  Date.prototype.today = function () {
+    const today = (new Date().getDay() + 6) % 7;
+    return sweDays[today] ?? sweDays[0];
   };
 });
