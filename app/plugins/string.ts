@@ -1,20 +1,4 @@
-import { sweDays, type SwedishDay } from '~/types/swedish-days';
-
 export default defineNuxtPlugin(() => {
-  String.prototype.getShortDate = function () {
-    const today = new Date();
-    if (today.getDay() === 0) {
-      today.setDate(today.getDate() - 1);
-    }
-    const mondayThisWeek = today.getDate() - today.getDay() + 1;
-    return new Date(
-      today.setDate(mondayThisWeek + sweDays.indexOf(this as SwedishDay))
-    ).toLocaleDateString('se-SE', {
-      month: '2-digit',
-      day: '2-digit',
-    });
-  };
-
   String.prototype.toSentenceCase = function () {
     if (!this) {
       return '';

@@ -6,7 +6,6 @@ declare global {
   }
 
   interface String {
-    getShortDate(): string;
     toSentenceCase(): string;
     toFullSentenceCase(): string;
     toDotNotation(): string;

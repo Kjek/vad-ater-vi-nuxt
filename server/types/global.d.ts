@@ -1,40 +1,11 @@
 declare global {
-  interface Date {
-    getWeek(): number;
-    isPastSevenUTC(): boolean;
-  }
-
   interface String {
-    getShortDate(): string;
     toSentenceCase(): string;
     toFullSentenceCase(): string;
     toDotNotation(): string;
     toRegExp(): RegExp | undefined;
   }
 }
-
-Date.prototype.getWeek = function () {
-  const weekOne = new Date(this.getFullYear(), 0, 4);
-  return Math.ceil(((this.valueOf() - weekOne.valueOf()) / 86400000 + weekOne.getDay() - 1) / 7);
-};
-
-Date.prototype.isPastSevenUTC = function () {
-  return this.getUTCHours() >= 7;
-};
-
-String.prototype.getShortDate = function () {
-  const today = new Date();
-  if (today.getDay() === 0) {
-    today.setDate(today.getDate() - 1);
-  }
-  const mondayThisWeek = today.getDate() - today.getDay() + 1;
-  return new Date(
-    today.setDate(mondayThisWeek + sweDays.indexOf(this as SwedishDay))
-  ).toLocaleDateString('se-SE', {
-    month: '2-digit',
-    day: '2-digit',
-  });
-};
 
 String.prototype.toSentenceCase = function () {
   if (!this) {

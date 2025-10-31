@@ -6,10 +6,6 @@ export default defineNuxtPlugin(() => {
     return Math.ceil(((this.valueOf() - weekOne.valueOf()) / 86400000 + weekOne.getDay() - 1) / 7);
   };
 
-  Date.prototype.isPastSevenUTC = function () {
-    return this.getUTCHours() >= 7;
-  };
-
   Date.prototype.today = function () {
     const today = (new Date().getDay() + 6) % 7;
     return sweDays[today] ?? sweDays[0];
