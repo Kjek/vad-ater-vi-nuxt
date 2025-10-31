@@ -22,8 +22,8 @@ export const useFilterStore = defineStore('filter', () => {
   const isDaySelected = (day: string) => daysSelected.value.includes(day);
 
   onMounted(() => {
-    const today = new Date().today();
-    daysSelected.value = [today];
+    today.value = new Date().today();
+    daysSelected.value = [today.value];
   });
 
   return { daysSelected, isAllDaysSelected, toggleDay: filterDay, toggleAll, isDaySelected };
