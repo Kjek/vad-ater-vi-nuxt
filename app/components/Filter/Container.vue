@@ -101,13 +101,14 @@ import { storeToRefs } from 'pinia';
 import { useFilterStore } from '~/stores/use-filter';
 import { sweDays } from '~/types/swedish-days';
 
+const week = ref<string>('v.--');
 const filterStore = useFilterStore();
 const { isAllDaysSelected } = storeToRefs(filterStore);
 const { toggleDay, toggleAll, isDaySelected } = filterStore;
 const restaurantsStore = useRestaurantsStore();
 const { searchQuery } = storeToRefs(restaurantsStore);
 
-const week = computed(() => `v.${new Date().getWeek()}`);
+onMounted(() => {
+  week.value = `v.${new Date().getWeek()}`;
+});
 </script>
-
-<style></style>
