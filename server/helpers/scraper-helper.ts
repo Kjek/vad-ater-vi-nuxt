@@ -2,6 +2,7 @@ import { isLunchMenus, isWeekMenu } from '~/types/lunch-menu';
 import { getRestaurantConfig } from './admin-db-helper';
 import { deleteMenuAndWeekly, updateRestaurantFood } from './db-helper';
 import genericWebScraper from '../scrapers/generic';
+import { withRetry } from '../utils/scraper-utils';
 
 export const scrapeNewData = async (restaurantId: string) => {
   const { lunchUrl, lunchRegex, weeklyRegex, enabled } = await getRestaurantConfig(restaurantId);
@@ -23,13 +24,24 @@ export const handleScraper = async (restaurantId: string) => {
   }
 };
 
+export const scrapeWithRetry = async (restaurantId: string) => {
+  try {
+    await withRetry(() => handleScraper(restaurantId));
+  } catch (err) {
+    console.error(`[SCRAPER ERROR] ${restaurantId}:`, err);
+  }
+};
+
 export const handleLunchScrapers = async () => {
   const restaurants = await prisma.restaurantConfig.findMany({
-    select: {
-      restaurantId: true,
-    },
+    select: { restaurantId: true },
   });
-  await Promise.all(restaurants.map(({ restaurantId }) => handleScraper(restaurantId)));
+
+  const results = await Promise.all(
+    restaurants.map(({ restaurantId }) => scrapeWithRetry(restaurantId))
+  );
+
+  return results;
 };
 
 export const handleDebugScraper = async (restaurantId: string) => {

@@ -1,5 +1,5 @@
 import { getServerSession } from '#auth';
-import { handleScraper } from '~~/server/helpers/scraper-helper';
+import { scrapeWithRetry } from '~~/server/helpers/scraper-helper';
 
 export default defineEventHandler(async (event) => {
   const session = await getServerSession(event);
@@ -9,6 +9,6 @@ export default defineEventHandler(async (event) => {
   }
   const id = getRouterParam(event, 'id');
   if (id) {
-    await handleScraper(id);
+    await scrapeWithRetry(id);
   }
 });
