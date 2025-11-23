@@ -10,14 +10,16 @@ import { decodeHtmlEntity } from '../utils/html-utils';
 
 const genericWebScraper: Scraper = async (lunchUrl, lunchRegex, weeklyRegex, debug) => {
   console.time(`Generic scraper for ${lunchUrl}`);
-
-  const html = await (
-    await fetch(lunchUrl, {
-      headers: {
-        'Accept-Encoding': 'gzip',
-      },
-    })
-  ).text();
+  const response = await fetch(lunchUrl, {
+    headers: {
+      'Accept-Encoding': 'gzip',
+    },
+  });
+  if (!response.ok) {
+    console.timeEnd(`Generic scraper for ${lunchUrl}`);
+    throw new Error(`${response.status}: ${response.statusText}`);
+  }
+  const html = await response.text();
   const { document } = parseHTML(html);
   const searchRegex = /^\s*(?:Tisdag|Tis|Torsdag|Tors)(?!\w|\s*\d+:|:\s*\d+:)/gim;
   const lunchMenu = (
@@ -43,9 +45,9 @@ const genericWebScraper: Scraper = async (lunchUrl, lunchRegex, weeklyRegex, deb
 
   if (debug) {
     console.timeEnd(`Generic scraper for ${lunchUrl}`);
-    return (
-      JSON.stringify(lunchMenu) ?? JSON.stringify('ERROR: SOMETHING WITH THE SCRAPER WENT WRONG!')
-    );
+    console.log(`[SCRAPER DEBUG] [Document] ${document}`);
+    console.log(`[SCRAPER DEBUG] [Lunch Menu] ${lunchMenu}`);
+    return JSON.stringify(lunchMenu ?? '404 No lunch menu found');
   }
 
   const lunchWeek: LunchMenu[] = [];
