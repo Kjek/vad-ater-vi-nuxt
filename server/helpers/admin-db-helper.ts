@@ -3,6 +3,7 @@ import type {
   CreateRestaurantConfig,
 } from '~~/server/types/restaurant-config';
 import { scrapeNewData } from './scraper-helper';
+import { toRegExp } from '../utils/string-utils';
 
 export const getRestaurantConfig = async (restaurantId: string) => {
   const restaurant = await prisma.restaurantConfig.findUniqueOrThrow({
@@ -12,8 +13,8 @@ export const getRestaurantConfig = async (restaurantId: string) => {
   });
   return {
     ...restaurant,
-    lunchRegex: restaurant.lunchRegex?.toRegExp(),
-    weeklyRegex: restaurant.weeklyRegex?.toRegExp(),
+    lunchRegex: toRegExp(restaurant.lunchRegex),
+    weeklyRegex: toRegExp(restaurant.weeklyRegex),
   };
 };
 

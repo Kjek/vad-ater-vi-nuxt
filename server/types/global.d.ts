@@ -3,7 +3,6 @@ declare global {
     toSentenceCase(): string;
     toFullSentenceCase(): string;
     toDotNotation(): string;
-    toRegExp(): RegExp | undefined;
   }
 }
 
@@ -48,13 +47,6 @@ String.prototype.toDotNotation = function () {
     return '';
   }
   return this.trim().replaceAll(/\s/g, '.').toLocaleLowerCase();
-};
-
-String.prototype.toRegExp = function () {
-  if (!this) {
-    return undefined;
-  }
-  return new RegExp(this.replace('/', '').replace(/\/\w+?$/, ''), this.split('/').slice(-1)[0]);
 };
 
 export {};

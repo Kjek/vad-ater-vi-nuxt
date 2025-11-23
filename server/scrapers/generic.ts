@@ -53,26 +53,29 @@ const genericWebScraper: Scraper = async (lunchUrl, lunchRegex, weeklyRegex, deb
   if (lunchMenu) {
     const lunchMatch = lunchMenu.matchAll(
       lunchRegex ??
-        /(?:\nM[åÅ]ndag):?(?:\s\d+\/\d)?\s+([\W\w]*?)(?=\nTisdag)\nTisdag:?(?:\s\d+\/\d)?\s+([\W\w]*?)(?=\nOnsdag)\nOnsdag:?(?:\s\d+\/\d)?\s+([\W\w]*?)(?=\nTorsdag)\nTorsdag:?(?:\s\d+\/\d)?\s+([\W\w]*?)(?=\nFredag)\nFredag:?(?:\s\d+\/\d)?\s+([\W\w]*?)(?=\nVeckans|L[öÖ]rdag|\n{2,}|\n+\s{2,})|(?:\nM[åÅ]n):?(?:\s\d+\/\d)?\s+([\W\w]*?)(?=\nTis)\nTis:?(?:\s\d+\/\d)?\s+([\W\w]*?)(?=\nOns)\nOns:?(?:\s\d+\/\d)?\s+([\W\w]*?)(?=\nTors)\nTors:?(?:\s\d+\/\d)?\s+([\W\w]*?)(?=\nFre)\nFre:?(?:\s\d+\/\d)?\s+([\W\w]*?)(?=\nVeckans|L[öÖ]rdag|\n{2,}|\n+\s{2,})/gim
+        /(?<=\n|\s|^)(?:Måndag|Tisdag|Onsdag|Torsdag|Fredag|Mån|Tis|Ons|Tors|Fre)\s*:?(?:\s*\d+\/\d+)?\s*\n+([\s\S]*?)(?=\n+\s*(?:Måndag|Tisdag|Onsdag|Torsdag|Fredag|Mån|Tis|Ons|Tors|Fre)\b|\nVeckans|L[öÖ]rdag|\n{2,}|\n+\s{2,})/gim
     );
     const weeklyMatch = lunchMenu.matchAll(
       weeklyRegex ??
         /\n+(Veckans\s(?!Lunch)\w+):?\s+(?!\/\s?Veckans)([a-zA-ZåäöÅÄÖ\W,.0-9\s-]*?)(?=\nVeckans|M[åÅ]ndag|-{3,}|\n[A-Ö])/gim
     );
-    const lunchGroups = [...lunchMatch][0];
+    const lunchGroups = [...lunchMatch];
     if (lunchGroups) {
-      lunchGroups.shift();
       lunchGroups.forEach((group, index) => {
         if (group) {
-          lunchWeek.push({
-            day: sweDays[index],
-            food: decodeHtmlEntity(
-              group
-                .replace(/\d\.\s?/gim, '')
-                .replace(/^\s?\*\s?/gm, '')
-                .replace(/\n{2,}/gim, '\n')
-            ).trim(),
-          } as LunchMenu);
+          const food = group[1];
+          if (food) {
+            lunchWeek.push({
+              day: sweDays[index],
+              food: decodeHtmlEntity(
+                food
+                  .replace(/\d\.\s?/gim, '')
+                  .replace(/^\s?\*\s?/gm, '')
+                  .replace(/\n{2,}/gim, '\n')
+                  .replaceAll('• ', '')
+              ).trim(),
+            } as LunchMenu);
+          }
         }
       });
     }
