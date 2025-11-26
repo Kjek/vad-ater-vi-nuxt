@@ -1,3 +1,4 @@
+/* eslint-disable @stylistic/indent-binary-ops */
 /// <reference lib="dom" />
 /// <reference types="node" />
 
@@ -7,6 +8,7 @@ import { sweDays } from '~/types/swedish-days';
 import type Scraper from '../types/scraper';
 import { removeDuplicatesWithKey } from '../utils/array-utils';
 import { decodeHtmlEntity } from '../utils/html-utils';
+import { toSentenceCase } from '../utils/string-utils';
 
 const genericWebScraper: Scraper = async (lunchUrl, lunchRegex, weeklyRegex, debug) => {
   console.time(`Generic scraper for ${lunchUrl}`);
@@ -23,13 +25,16 @@ const genericWebScraper: Scraper = async (lunchUrl, lunchRegex, weeklyRegex, deb
     'Sec-Fetch-User': '?1',
     'Cache-Control': 'max-age=0',
   };
+
   const response = await fetch(lunchUrl, {
     headers: HEADERS,
   });
+
   if (!response.ok) {
     console.timeEnd(`Generic scraper for ${lunchUrl}`);
     throw new Error(`${response.status}: ${response.statusText}`);
   }
+
   const html = await response.text();
   const { document } = parseHTML(html);
   const searchRegex = /^\s*(?:Tisdag|Tis|Torsdag|Tors)(?!\w|\s*\d+:|:\s*\d+:)/gim;
@@ -66,7 +71,7 @@ const genericWebScraper: Scraper = async (lunchUrl, lunchRegex, weeklyRegex, deb
   if (lunchMenu) {
     const lunchMatch = lunchMenu.matchAll(
       lunchRegex ??
-        /(?<=\n|\s|^)(?:Måndag|Tisdag|Onsdag|Torsdag|Fredag|Mån|Tis|Ons|Tors|Fre)\s*:?(?:\s*\d+\/\d+)?\s*\n+([\s\S]*?)(?=\n+\s*(?:Måndag|Tisdag|Onsdag|Torsdag|Fredag|Mån|Tis|Ons|Tors|Fre)\b|\nVeckans|L[öÖ]rdag|\n{2,}|\n+\s{2,})/gim
+        /(?<=\n|\s|^)(Måndag|Tisdag|Onsdag|Torsdag|Fredag|Mån|Tis|Ons|Tors|Fre)\s*:?(?:\s*\d+\/\d+)?\s*\n+([\s\S]*?)(?=\n+\s*(?:Måndag|Tisdag|Onsdag|Torsdag|Fredag|Mån|Tis|Ons|Tors|Fre)\b|\nVeckans|L[öÖ]rdag|\n{2,}|\n+\s{2,})/gim
     );
     const weeklyMatch = lunchMenu.matchAll(
       weeklyRegex ??
@@ -74,28 +79,29 @@ const genericWebScraper: Scraper = async (lunchUrl, lunchRegex, weeklyRegex, deb
     );
     const lunchGroups = [...lunchMatch];
     if (lunchGroups) {
-      lunchGroups.forEach((group, index) => {
-        if (group) {
-          const food = group[1];
-          if (food) {
-            lunchWeek.push({
-              day: sweDays[index],
-              food: decodeHtmlEntity(
-                food
-                  .replace(/\d\.\s?/gim, '')
-                  .replace(/^\s?\*\s?/gm, '')
-                  .replace(/\n{2,}/gim, '\n')
-                  .replaceAll('• ', '')
-              ).trim(),
-            } as LunchMenu);
-          }
+      lunchGroups.forEach((group) => {
+        const [match, matchDay, matchFood] = group;
+        if (match && matchDay && matchFood) {
+          const day = sweDays.find((sweDay) =>
+            sweDay.toLowerCase().includes(matchDay.toLowerCase())
+          );
+          lunchWeek.push({
+            day,
+            food: decodeHtmlEntity(
+              matchFood
+                .replace(/\d\.\s?/gim, '')
+                .replace(/^\s?\*\s?/gm, '')
+                .replace(/\n{2,}/gim, '\n')
+                .replaceAll('• ', '')
+            ).trim(),
+          } as LunchMenu);
         }
       });
     }
     for (const group of weeklyMatch) {
       if (group[1] && group[2] && group[2].length > 0) {
         weeklySpecials.push({
-          type: group[1].toSentenceCase(),
+          type: toSentenceCase(group[1]),
           food: decodeHtmlEntity(group[2].replaceAll(/\d\.\s?/gim, '')).trim(),
         } as WeeklySpecial);
       }
