@@ -3,7 +3,7 @@
     <FilterContainer />
     <UPageList
       as="ul"
-      class="gap-4 pb-32 md:pb-8"
+      class="gap-4 pb-36 md:pb-8"
     >
       <template v-if="restaurants.length > 0">
         <UPageCard

@@ -1,8 +1,8 @@
 <template>
   <div
-    class="fixed bottom-0 left-1/2 z-10 flex w-full -translate-x-1/2 flex-col justify-center gap-2 bg-white pb-8 md:static md:left-auto md:z-0 md:translate-0 md:flex-row md:bg-transparent md:pt-4 md:pb-4 dark:bg-neutral-900 dark:md:bg-transparent"
+    class="fixed bottom-0 left-1/2 z-10 flex w-full -translate-x-1/2 flex-col justify-center gap-2 bg-white/75 pb-8 backdrop-blur-md md:static md:left-auto md:z-0 md:translate-0 md:flex-row md:bg-transparent md:pt-4 md:pb-4 dark:bg-neutral-900/75 dark:md:bg-transparent"
   >
-    <div class="flex w-full gap-4 p-4 md:hidden">
+    <div class="flex w-full flex-col gap-4 p-4 md:hidden">
       <UInput
         id="search-restaurant"
         v-model="searchQuery"
@@ -11,46 +11,36 @@
         placeholder="Sök restauranger..."
         class="grow"
       />
-      <UPopover
-        :content="{
-          align: 'end',
-          side: 'top',
-          sideOffset: 8,
-        }"
-      >
-        <UButton
-          color="neutral"
-          variant="outline"
-          icon="i-lucide-funnel"
-          aria-label="Filter"
-        />
-        <template #content>
-          <ul class="flex w-full flex-row gap-2 p-4">
-            <li key="filter-week">
-              <UButton
-                :icon="isAllDaysSelected ? 'i-lucide-x' : 'i-lucide-calendar'"
-                color="neutral"
-                variant="outline"
-                aria-label="Hela veckan"
-                @click="toggleAll"
-              />
-            </li>
-            <li
-              v-for="day in sweDays"
-              :key="day"
-            >
-              <UButton
-                :label="day.slice(0, 3)"
-                color="neutral"
-                variant="outline"
-                :active="isDaySelected(day)"
-                active-color="primary"
-                @click="toggleDay(day)"
-              />
-            </li>
-          </ul>
-        </template>
-      </UPopover>
+      <ul class="flex w-full flex-row gap-4">
+        <li
+          key="filter-week"
+          class="flex-1"
+        >
+          <UButton
+            class="w-full justify-center px-2"
+            :icon="isAllDaysSelected ? 'i-lucide-x' : 'i-lucide-calendar'"
+            color="neutral"
+            variant="outline"
+            aria-label="Hela veckan"
+            @click="toggleAll"
+          />
+        </li>
+        <li
+          v-for="day in sweDays"
+          :key="day"
+          class="flex-1"
+        >
+          <UButton
+            class="w-full justify-center px-2 tracking-wide"
+            :label="day.slice(0, 3)"
+            color="neutral"
+            variant="outline"
+            :active="isDaySelected(day)"
+            active-color="primary"
+            @click="toggleDay(day)"
+          />
+        </li>
+      </ul>
     </div>
     <BaseText
       as="h2"
