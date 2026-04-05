@@ -52,14 +52,14 @@ const onLogin = async (username: string, password: string) => {
   if (res?.error) {
     toast.add({ title: 'Error', description: res.error, color: 'error' });
   } else {
-    navigateTo('/admin');
+    await navigateTo('/admin');
   }
 };
 
 const onLoginPasskey = async (username: string) => {
   await usePKAuthenticate(username);
 
-  navigateTo('/admin');
+  await navigateTo('/admin');
 };
 
 const onSignUp = async (creds: CreateAccount) => {
@@ -78,7 +78,7 @@ const onSignUpPasskey = async (creds: CreateAccountPasskey) => {
     await usePKAuthenticate(creds.username);
 
     open.value = false;
-    navigateTo('/admin');
+    await navigateTo('/admin');
   } catch (err) {
     console.error(err);
   }

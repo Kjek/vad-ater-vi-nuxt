@@ -53,7 +53,6 @@ export default NuxtAuthHandler({
                 body: credentials.webauthn,
               }
             );
-            console.log('result', result);
 
             if (result.verified) {
               return await prisma.user.findUnique({
