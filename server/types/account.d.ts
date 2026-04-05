@@ -3,3 +3,5 @@ export interface CreateAccount {
   password: string;
   secret: string;
 }
+
+export type CreateAccountPasskey = Omit<CreateAccount, 'password'>;

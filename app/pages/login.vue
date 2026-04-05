@@ -1,7 +1,10 @@
 <template>
   <UContainer class="min-h-[inherit] w-fit content-center">
     <UPageCard>
-      <FormLogin @sign-in="onLogin" />
+      <FormLogin
+        @sign-in="onLogin"
+        @sign-in-passkey="onLoginPasskey"
+      />
     </UPageCard>
   </UContainer>
   <UModal
@@ -16,14 +19,19 @@
     ></UButton>
     <template #body>
       <UContainer class="w-fit">
-        <FormSignup @sign-up="onSignUp"></FormSignup>
+        <FormSignup
+          @sign-up="onSignUp"
+          @sign-up-passkey="onSignUpPasskey"
+        ></FormSignup>
       </UContainer>
     </template>
   </UModal>
 </template>
 
 <script lang="ts" setup>
-import type { CreateAccount } from '~~/server/types/account';
+import { usePKAuthenticate } from '~/composables/use-pk-authenticate';
+import { usePKRegister } from '~/composables/use-pk-register';
+import type { CreateAccount, CreateAccountPasskey } from '~~/server/types/account';
 
 const open = ref<boolean>(false);
 
@@ -48,6 +56,12 @@ const onLogin = async (username: string, password: string) => {
   }
 };
 
+const onLoginPasskey = async (username: string) => {
+  await usePKAuthenticate(username);
+
+  navigateTo('/admin');
+};
+
 const onSignUp = async (creds: CreateAccount) => {
   const { status } = await useToastFetch('/api/auth/signup', {
     method: 'POST',
@@ -55,6 +69,18 @@ const onSignUp = async (creds: CreateAccount) => {
   });
   if (status.value === 'success') {
     open.value = false;
+  }
+};
+
+const onSignUpPasskey = async (creds: CreateAccountPasskey) => {
+  try {
+    await usePKRegister(creds);
+    await usePKAuthenticate(creds.username);
+
+    open.value = false;
+    navigateTo('/admin');
+  } catch (err) {
+    console.error(err);
   }
 };
 </script>

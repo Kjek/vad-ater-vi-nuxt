@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "pnpm dlx prisma generate && nuxt build",
+    "build": "pnpm prisma generate && nuxt build",
     "vercel-build": "pnpm prisma generate && pnpm prisma migrate deploy && nuxt build",
     "dev": "nuxt dev",
     "preview": "nuxt preview",
@@ -12,7 +12,7 @@
     "lint": "eslint .",
     "typecheck": "nuxt typecheck",
     "prepare": "husky",
-    "prisma:generate": "pnpm dlx prisma generate"
+    "prisma:generate": "pnpm prisma generate"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.70",
@@ -22,6 +22,8 @@
     "@pinia/nuxt": "^0.11.2",
     "@prisma/client": "^6.18.0",
     "@sidebase/nuxt-auth": "1.1.0",
+    "@simplewebauthn/browser": "^13.3.0",
+    "@simplewebauthn/server": "^13.3.0",
     "bcrypt": "^6.0.0",
     "clsx": "^2.1.1",
     "linkedom": "^0.18.12",

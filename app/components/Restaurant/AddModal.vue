@@ -2,15 +2,15 @@
   <SettingsItemContent>
     <template #right>
       <UModal
-        v-model:open="open"
+        :open="open"
         title="Add Restaurant"
         description="Create a new restaurant entry for the page. Name and the URL's are mandatory"
       >
-        <UButton
+        <!-- <UButton
           label="Add restaurant"
           color="neutral"
           variant="outline"
-        />
+        /> -->
         <template #body>
           <UForm
             :validate="validate"
@@ -80,16 +80,22 @@
 import type { FormError } from '@nuxt/ui';
 import type { CreateRestaurantConfig } from '~~/server/types/restaurant-config';
 
+interface Props {
+  open: boolean;
+}
+
 interface Emits {
   (e: 'addRestaurant', restaurantSetting: CreateRestaurantConfig): void;
 }
 
+defineProps<Props>();
+
 const emit = defineEmits<Emits>();
 
-const open = ref<boolean>(false);
-defineShortcuts({
-  o: () => (open.value = !open.value),
-});
+// const open = ref<boolean>(false);
+// defineShortcuts({
+//   o: () => (open.value = !open.value),
+// });
 
 const state = reactive<Partial<CreateRestaurantConfig>>({
   name: undefined,
@@ -117,7 +123,6 @@ const onSubmit = async () => {
   Object.keys(state).forEach((key) => {
     state[key as keyof typeof state] = undefined;
   });
-  open.value = false;
 };
 </script>
 
