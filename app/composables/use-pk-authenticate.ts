@@ -20,7 +20,7 @@ export const usePKAuthenticate = async (username: string) => {
   const asseResp = await startAuthentication({ optionsJSON: authenticateOptions.value });
 
   const login = await signIn('credentials', {
-    redirect: false,
+    callbackUrl: '/admin',
     username: username,
     webauthn: JSON.stringify({
       expectedChallenge: authenticateOptions.value?.challenge,

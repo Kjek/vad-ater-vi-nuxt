@@ -57,8 +57,7 @@ const onAddPasskey = async () => {
 };
 
 const onLogout = async () => {
-  await signOut({ redirect: false });
-  await navigateTo('/login');
+  await signOut({ callbackUrl: '/login' });
 };
 
 const items = ref<DropdownMenuItem[][]>([
