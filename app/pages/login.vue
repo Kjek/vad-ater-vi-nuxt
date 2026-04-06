@@ -55,7 +55,11 @@ const onLogin = async (username: string, password: string) => {
 };
 
 const onLoginPasskey = async (username: string) => {
-  await usePKAuthenticate(username);
+  try {
+    await usePKAuthenticate(username);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const onSignUp = async (creds: CreateAccount) => {
@@ -65,6 +69,7 @@ const onSignUp = async (creds: CreateAccount) => {
   });
   if (status.value === 'success') {
     open.value = false;
+    await onLogin(creds.username, creds.password);
   }
 };
 
@@ -72,8 +77,6 @@ const onSignUpPasskey = async (creds: CreateAccountPasskey) => {
   try {
     await usePKRegister(creds);
     await usePKAuthenticate(creds.username);
-
-    open.value = false;
   } catch (err) {
     console.error(err);
   }

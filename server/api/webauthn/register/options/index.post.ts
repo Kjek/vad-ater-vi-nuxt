@@ -29,7 +29,7 @@ export default defineEventHandler(async (event) => {
     attestationType: 'none',
     excludeCredentials: user?.passkeys.map((pk) => ({
       id: pk.id,
-      transports: pk.transports as unknown as AuthenticatorTransportFuture[],
+      transports: pk.transports as AuthenticatorTransportFuture[],
     })),
     authenticatorSelection: {
       authenticatorAttachment: 'cross-platform', // YubiKey

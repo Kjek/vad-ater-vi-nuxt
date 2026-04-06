@@ -11,7 +11,9 @@ export const usePKRegister = async (credentials?: CreateAccountPasskey) => {
       body: credentials,
     });
 
-  if (registerStatus.value !== 'success' || !registerOptions.value) return;
+  if (registerStatus.value !== 'success' || !registerOptions.value) {
+    throw new Error('Passkey registration for options failed');
+  }
 
   const attResp = await startRegistration({ optionsJSON: registerOptions.value });
 
@@ -24,6 +26,6 @@ export const usePKRegister = async (credentials?: CreateAccountPasskey) => {
   );
 
   if (!registerVerification.value?.verified) {
-    throw new Error('Passkey registration failed');
+    throw new Error('Passkey verification failed');
   }
 };

@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
     rpID: process.env.RPID ?? 'localhost',
     allowCredentials: user.passkeys.map((pk) => ({
       id: pk.id,
-      transports: pk.transports as unknown as AuthenticatorTransportFuture[],
+      transports: pk.transports as AuthenticatorTransportFuture[],
     })),
     userVerification: 'preferred',
   });
