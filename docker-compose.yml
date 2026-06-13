@@ -11,7 +11,7 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD', 'pg_isready -u postgres -d postgres']
+      test: ['CMD', 'pg_isready', '-U', 'postgres', '-d', 'postgres']
       interval: 10s
       timeout: 5s
       retries: 3

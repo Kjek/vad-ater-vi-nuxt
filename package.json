@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "pnpm prisma generate && nuxt build",
+    "build": "nuxt build",
     "vercel-build": "pnpm prisma generate && pnpm prisma migrate deploy && nuxt build",
     "dev": "nuxt dev",
     "preview": "nuxt preview",
@@ -12,7 +12,8 @@
     "lint": "eslint .",
     "typecheck": "nuxt typecheck",
     "prepare": "husky",
-    "prisma:generate": "pnpm prisma generate"
+    "prisma:generate": "pnpm prisma generate",
+    "prisma:deploy": "pnpm prisma migrate deploy && pnpm prisma:generate"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.70",
@@ -39,6 +40,7 @@
     "@types/node": "^24.9.1",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/test-utils": "^2.4.6",
+    "autoprefixer": "^10.5.0",
     "chromium": "^3.0.3",
     "eslint": "^9.38.0",
     "eslint-config-prettier": "^10.1.8",
@@ -47,9 +49,11 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.2.6",
     "playwright-core": "^1.56.1",
+    "postcss": "^8.5.15",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.7.1",
     "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.3.1",
     "typescript": "^5.9.3",
     "vitest": "^4.0.3",
     "vue-eslint-parser": "^10.2.0",
