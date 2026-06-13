@@ -14,7 +14,7 @@ RUN pnpm prisma:generate
 RUN pnpm build
 
 
-FROM node:22.20-alpine
+FROM node:22.20-alpine AS app
 
 WORKDIR /app
 
@@ -26,3 +26,11 @@ COPY --from=build /app/package.json ./
 EXPOSE 3000
 
 CMD ["node", ".output/server/index.mjs"]
+
+FROM build AS migrate
+
+WORKDIR /app
+
+RUN corepack enable
+
+CMD ["pnpm", "exec", "prisma", "migrate", "deploy"]
