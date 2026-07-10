@@ -1,5 +1,5 @@
 <template>
-  <div class="border-b p-6 break-words whitespace-pre-line last:border-none sm:flex">
+  <div class="border-b p-6 wrap-break-word whitespace-pre-line last:border-none sm:flex">
     <BaseText
       as="h2"
       class="w-fit pb-8 md:w-1/3 md:pb-0"

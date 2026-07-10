@@ -5,9 +5,9 @@ import genericWebScraper from '../scrapers/generic';
 import { withRetry } from '../utils/scraper-utils';
 
 export const scrapeNewData = async (restaurantId: string) => {
-  const { lunchUrl, lunchRegex, weeklyRegex, enabled } = await getRestaurantConfig(restaurantId);
+  const { lunchUrl, enabled } = await getRestaurantConfig(restaurantId);
   if (enabled && lunchUrl) {
-    const menu = await genericWebScraper(lunchUrl, lunchRegex, weeklyRegex);
+    const menu = await genericWebScraper(lunchUrl);
     if (isLunchMenus(menu)) {
       await updateRestaurantFood(restaurantId, menu);
     } else if (isWeekMenu(menu)) {
@@ -45,8 +45,8 @@ export const handleLunchScrapers = async () => {
 };
 
 export const handleDebugScraper = async (restaurantId: string) => {
-  const { lunchUrl, lunchRegex, weeklyRegex } = await getRestaurantConfig(restaurantId);
+  const { lunchUrl } = await getRestaurantConfig(restaurantId);
   if (lunchUrl) {
-    return await genericWebScraper(lunchUrl, lunchRegex, weeklyRegex, true);
+    return await genericWebScraper(lunchUrl, true);
   }
 };

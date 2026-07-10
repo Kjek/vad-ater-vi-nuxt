@@ -1,10 +1,5 @@
 import type { LunchMenu, WeekMenu } from '~/types/lunch-menu';
 
-type Scraper = (
-  lunchUrl: string,
-  lunchRegex?: RegExp | undefined,
-  weeklyRegex?: RegExp | undefined,
-  debug?: boolean
-) => Promise<LunchMenu[] | WeekMenu | string>;
+type Scraper = (lunchUrl: string, debug?: boolean) => Promise<LunchMenu[] | WeekMenu | string>;
 
 export default Scraper;
