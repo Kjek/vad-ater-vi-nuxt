@@ -1,4 +1,4 @@
-FROM node:22.20-alpine AS build
+FROM node:24.18-alpine AS build
 
 WORKDIR /app
 
@@ -14,7 +14,7 @@ RUN pnpm prisma:generate
 RUN pnpm build
 
 
-FROM node:22.20-alpine AS app
+FROM node:24.18-alpine AS app
 
 WORKDIR /app
 
@@ -27,10 +27,15 @@ EXPOSE 3000
 
 CMD ["node", ".output/server/index.mjs"]
 
-FROM build AS migrate
+FROM node:24.18-alpine AS migrate
 
 WORKDIR /app
 
 RUN corepack enable
+
+COPY --from=build /app/package.json /app/pnpm-lock.yaml ./
+COPY --from=build /app/prisma ./prisma
+
+RUN pnpm install --prod --frozen-lockfile --ignore-scripts
 
 CMD ["pnpm", "exec", "prisma", "migrate", "deploy"]
