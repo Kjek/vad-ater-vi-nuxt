@@ -2,19 +2,14 @@
   <SettingsItemContent>
     <template #right>
       <UModal
-        :open="open"
+        v-model:open="open"
         title="Add Restaurant"
         description="Create a new restaurant entry for the page. Name and the URL's are mandatory"
       >
-        <!-- <UButton
-          label="Add restaurant"
-          color="neutral"
-          variant="outline"
-        /> -->
         <template #body>
           <UForm
             :validate="validate"
-            :state="state"
+            :state
             class="space-y-4"
             @submit.prevent="onSubmit"
           >
@@ -36,18 +31,6 @@
                 name="lunch-url"
               >
                 <UInput v-model="state.lunchUrl" />
-              </UFormField>
-              <UFormField
-                label="Lunch RegExp (Optional)"
-                name="lunch-regex"
-              >
-                <UInput v-model="state.lunchRegex" />
-              </UFormField>
-              <UFormField
-                label="Weekly RegExp (Optional)"
-                name="weekly-regex"
-              >
-                <UInput v-model="state.weeklyRegex" />
               </UFormField>
               <UFormField
                 label="Enabled upon creation"
@@ -80,29 +63,22 @@
 import type { FormError } from '@nuxt/ui';
 import type { CreateRestaurantConfig } from '~~/server/types/restaurant-config';
 
-interface Props {
-  open: boolean;
-}
-
 interface Emits {
   (e: 'addRestaurant', restaurantSetting: CreateRestaurantConfig): void;
 }
 
-defineProps<Props>();
-
 const emit = defineEmits<Emits>();
 
-// const open = ref<boolean>(false);
-// defineShortcuts({
-//   o: () => (open.value = !open.value),
-// });
+const open = defineModel<boolean>('open');
+
+watch(open, (newVal) => {
+  console.log(newVal);
+});
 
 const state = reactive<Partial<CreateRestaurantConfig>>({
   name: undefined,
   homeUrl: undefined,
   lunchUrl: undefined,
-  lunchRegex: undefined,
-  weeklyRegex: undefined,
   enabled: false,
 });
 

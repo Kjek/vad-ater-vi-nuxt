@@ -23,8 +23,6 @@ type RestaurantConfigModel = {
   enabled: boolean;
   homeUrl: string;
   lunchUrl: string;
-  lunchRegex: string | null;
-  weeklyRegex: string | null;
 };
 
 type WeeklySpecialModel = {
@@ -128,8 +126,6 @@ describe('convertRestaurant', () => {
         name: 'Testaurant',
         homeUrl: 'https://example.com',
         lunchUrl: 'https://example.com/menu',
-        lunchRegex: '',
-        weeklyRegex: '',
         enabled: true,
       },
       menu: [

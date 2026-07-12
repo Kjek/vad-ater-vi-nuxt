@@ -6,8 +6,6 @@ export interface UpdateSettingsParamsProps {
   enabled?: boolean;
   homeUrl?: string;
   lunchUrl?: string;
-  lunchRegex?: string;
-  weeklyRegex?: string;
 }
 
 export type CreateRestaurantParamsProps = RequiredBy<

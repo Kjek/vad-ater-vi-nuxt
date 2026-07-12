@@ -1,18 +1,20 @@
 <template>
   <UPageList
     v-if="hasLeftSlot || hasRightSlot"
-    class="flex-row gap-4 self-end"
+    class="flex-row flex-wrap gap-4 self-end sm:flex-nowrap"
   >
     <div
       v-if="hasLeftSlot"
-      class="flex grow flex-row gap-4"
+      class="flex flex-row gap-4 sm:grow"
     >
       <slot name="left" />
     </div>
-    <slot
-      v-if="hasRightSlot"
-      name="right"
-    />
+    <div class="flex gap-4">
+      <slot
+        v-if="hasRightSlot"
+        name="right"
+      />
+    </div>
   </UPageList>
 </template>
 

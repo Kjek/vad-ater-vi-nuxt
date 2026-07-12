@@ -71,8 +71,6 @@ model RestaurantConfig {
   enabled      Boolean     @default(false)
   homeUrl      String
   lunchUrl     String
-  lunchRegex   String?
-  weeklyRegex  String?
   restaurantId String      @unique
   restaurant   Restaurant? @relation(fields: [restaurantId], references: [id], onUpdate: Cascade, onDelete: Cascade)
 

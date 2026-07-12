@@ -29,24 +29,16 @@ export function getWords(text: string): string[] {
 
 export function getTextStats(text: string): TextStats {
   const lines = getLines(text);
-
   const words = getWords(text);
-
   const uniqueLines = new Set(lines.map(normalizeForMatch));
-
   const totalLineLength = lines.reduce((sum, line) => sum + line.length, 0);
 
   return {
     characters: text.length,
-
     words: words.length,
-
     lines: lines.length,
-
     emptyLines: text.split('\n').filter((line) => !line.trim()).length,
-
     averageLineLength: lines.length ? totalLineLength / lines.length : 0,
-
     uniqueLineRatio: lines.length ? uniqueLines.size / lines.length : 0,
   };
 }
@@ -63,9 +55,7 @@ export function normalizeForMatch(text: string): string {
 
 export function removeDuplicateLines(text: string): string {
   const lines = getLines(text);
-
   const seen = new Set<string>();
-
   const result = lines.filter((line) => {
     const key = normalizeForMatch(line);
 
@@ -112,9 +102,7 @@ export function calculateLineSimilarity(lines: string[]): number {
   }
 
   const lengths = lines.map((line) => line.length);
-
   const average = lengths.reduce((a, b) => a + b, 0) / lengths.length;
-
   const similar = lengths.filter((length) => Math.abs(length - average) < average * 0.5);
 
   return similar.length / lines.length;

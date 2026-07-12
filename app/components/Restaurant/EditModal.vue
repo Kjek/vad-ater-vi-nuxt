@@ -38,18 +38,6 @@
                 <UInput v-model="state.lunchUrl" />
               </UFormField>
               <UFormField
-                label="Lunch RegExp (Optional)"
-                name="lunch-regex"
-              >
-                <UInput v-model="state.lunchRegex" />
-              </UFormField>
-              <UFormField
-                label="Weekly RegExp (Optional)"
-                name="weekly-regex"
-              >
-                <UInput v-model="state.weeklyRegex" />
-              </UFormField>
-              <UFormField
                 label="Enabled upon creation"
                 name="enabled"
               >
@@ -90,9 +78,6 @@ import { storeToRefs } from 'pinia';
 
 const props = defineProps<{ restaurantId: string }>();
 const open = ref<boolean>(false);
-defineShortcuts({
-  o: () => (open.value = !open.value),
-});
 
 const restaurantConfigsStore = useRestaurantConfigsStore();
 const { restaurantConfigs } = storeToRefs(restaurantConfigsStore);

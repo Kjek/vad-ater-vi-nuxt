@@ -17,18 +17,11 @@
           color="neutral"
           variant="outline"
         />
-        <!-- <UButton
-          label="Logout"
-          color="neutral"
-          variant="outline"
-          type="button"
-          @click="onLogout"
-        /> -->
       </UDropdownMenu>
     </template>
   </UHeader>
   <RestaurantAddModal
-    :open="restaurantAddModalOpen"
+    v-model:open="restaurantAddModalOpen"
     @add-restaurant="onCreateNewRestaurant"
   />
 </template>

@@ -11,11 +11,7 @@ export const getRestaurantConfig = async (restaurantId: string) => {
       restaurantId: restaurantId,
     },
   });
-  return {
-    ...restaurant,
-    lunchRegex: toRegExp(restaurant.lunchRegex),
-    weeklyRegex: toRegExp(restaurant.weeklyRegex),
-  };
+  return restaurant;
 };
 
 export const getAllRestaurantConfigsMinimal = async () => {
@@ -31,8 +27,6 @@ export const getAllRestaurantConfigs = async () => {
       name: true,
       homeUrl: true,
       lunchUrl: true,
-      lunchRegex: true,
-      weeklyRegex: true,
       enabled: true,
       restaurantId: true,
     },
@@ -50,8 +44,6 @@ export const createRestaurantConfig = async (createRestaurantConfig: CreateResta
           name: createRestaurantConfig.name,
           homeUrl: createRestaurantConfig.homeUrl,
           lunchUrl: createRestaurantConfig.lunchUrl,
-          lunchRegex: createRestaurantConfig.lunchRegex,
-          weeklyRegex: createRestaurantConfig.weeklyRegex,
           enabled: createRestaurantConfig.enabled,
         },
       },
@@ -75,8 +67,6 @@ export const updateRestaurantConfig = async (
       name: restaurantConfig.name,
       homeUrl: restaurantConfig.homeUrl,
       lunchUrl: restaurantConfig.lunchUrl,
-      lunchRegex: restaurantConfig.lunchRegex,
-      weeklyRegex: restaurantConfig.weeklyRegex,
       enabled: restaurantConfig.enabled,
     },
   });

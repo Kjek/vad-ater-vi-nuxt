@@ -44,9 +44,6 @@ interface Props {
   restaurantId: string;
 }
 const open = ref<boolean>(false);
-defineShortcuts({
-  o: () => (open.value = !open.value),
-});
 
 const props = defineProps<Props>();
 const copied = ref<boolean>(false);
