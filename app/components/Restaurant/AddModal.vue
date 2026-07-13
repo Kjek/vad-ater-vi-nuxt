@@ -47,7 +47,7 @@
                 <UButton
                   label="Create"
                   type="submit"
-                  color="neutral"
+                  color="primary"
                   variant="outline"
                 />
               </div>
@@ -68,8 +68,7 @@ interface Emits {
 }
 
 const emit = defineEmits<Emits>();
-
-const open = defineModel<boolean>('open');
+const open = defineModel<boolean>('open', { required: true });
 
 watch(open, (newVal) => {
   console.log(newVal);

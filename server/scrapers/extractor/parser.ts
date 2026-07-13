@@ -1,3 +1,5 @@
+import { getConfiguration } from '~~/server/helpers/admin-db-helper';
+
 /* eslint-disable @stylistic/indent-binary-ops */
 export interface ParsedDish {
   name: string;
@@ -52,10 +54,38 @@ const DAY_PATTERNS = [
   },
 ];
 
-export function parseMenu(text: string): ParsedMenu {
+const IGNORE_DEFAULT = [
+  'inkl',
+  'inklusive',
+  'serveras',
+  'öppettider',
+  'kontakt',
+  'telefon',
+  'boka',
+  'välkommen',
+  'hotell',
+  'buss',
+  'kvinna',
+  'bröllop',
+  'www',
+  '@',
+  'sms',
+  'personal',
+  'förfrågan',
+  'onödig',
+  'ödmjuk',
+  'uppgift',
+  'resa',
+  '...',
+];
+
+export async function parseMenu(text: string): Promise<ParsedMenu> {
+  const configuration = await getConfiguration('ignored-metadata');
+  const ignore = (configuration?.value as string[]) ?? IGNORE_DEFAULT;
+
   const cleaned = normalizeText(text);
   const sections = splitByDays(cleaned) ?? [];
-  const days = sections.map((section) => parseDay(section));
+  const days = sections.map((section) => parseDay(section, ignore));
 
   return {
     days,
@@ -96,13 +126,13 @@ function splitByDays(text: string) {
   return sections;
 }
 
-function parseDay(section: Section): ParsedDay {
+function parseDay(section: Section, ignore: string[]): ParsedDay {
   const lines = section.text
     .split('\n')
     .map((line: string) => line.replace(/^\*/i, '').trim())
     .filter(Boolean);
 
-  const dishes = lines.filter(isDishLine).map(parseDish);
+  const dishes = lines.filter((line) => isDishLine(line, ignore)).map(parseDish);
   console.log(dishes);
 
   return {
@@ -121,34 +151,8 @@ function parseDish(line: string): ParsedDish {
   };
 }
 
-function isDishLine(line: string) {
+function isDishLine(line: string, ignore: string[]) {
   const lower = line.toLowerCase();
-
-  // Ignore metadata
-  const ignore = [
-    'inkl',
-    'inklusive',
-    'serveras',
-    'öppettider',
-    'kontakt',
-    'telefon',
-    'boka',
-    'välkommen',
-    'hotell',
-    'buss',
-    'kvinna',
-    'bröllop',
-    'www',
-    '@',
-    'sms',
-    'personal',
-    'förfrågan',
-    'onödig',
-    'ödmjuk',
-    'uppgift',
-    'resa',
-    '...',
-  ];
 
   if (ignore.some((word) => lower.includes(word))) {
     return false;

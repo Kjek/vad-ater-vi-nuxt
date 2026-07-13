@@ -20,7 +20,7 @@ const genericWebScraper: Scraper = async (lunchUrl, debug) => {
     throw new Error('No menu candidate found');
   }
 
-  const menu = parseMenu(best.candidate.text);
+  const menu = await parseMenu(best.candidate.text);
 
   const lunchMenu = menu.days.map((data) => {
     return {

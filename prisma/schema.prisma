@@ -77,6 +77,13 @@ model RestaurantConfig {
   @@map("restaurant_config")
 }
 
+model Configuration {
+  key   String @id
+  value Json
+
+  @@map("configuration")
+}
+
 model Passkey {
   id         String   @id
   userId     String

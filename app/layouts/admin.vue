@@ -24,6 +24,7 @@
     v-model:open="restaurantAddModalOpen"
     @add-restaurant="onCreateNewRestaurant"
   />
+  <MetadataEditModal v-model:open="editMetadataModalOpen" />
 </template>
 
 <script lang="ts" setup>
@@ -31,6 +32,7 @@ import type { DropdownMenuItem } from '@nuxt/ui';
 import type { CreateRestaurantConfig } from '~~/server/types/restaurant-config';
 
 const restaurantAddModalOpen = ref<boolean>(false);
+const editMetadataModalOpen = ref<boolean>(false);
 
 const { signOut } = useAuth();
 const restaurantConfigsStore = useRestaurantConfigsStore();
@@ -60,21 +62,30 @@ const items = ref<DropdownMenuItem[][]>([
       icon: 'i-lucide-cog',
       kbds: [','],
       children: [
-        {
-          label: 'Re-scrape restaurants',
-          icon: 'i-lucide-refresh-cw',
-          onSelect: onScrapeAll,
-        },
-        {
-          label: 'Add restaurant',
-          icon: 'i-lucide-circle-plus',
-          onSelect: () => (restaurantAddModalOpen.value = true),
-        },
+        [
+          {
+            label: 'Re-scrape restaurants',
+            icon: 'i-lucide-refresh-cw',
+            onSelect: onScrapeAll,
+          },
+          {
+            label: 'Add restaurant',
+            icon: 'i-lucide-circle-plus',
+            onSelect: () => (restaurantAddModalOpen.value = true),
+          },
+        ],
+        [
+          {
+            label: 'Edit ignored metadata',
+            icon: 'i-lucide-edit',
+            onSelect: () => (editMetadataModalOpen.value = true),
+          },
+        ],
       ],
     },
     {
       label: 'Add passkey',
-      icon: 'i-lucide-fingerprint-pattern',
+      icon: 'i-lucide-key-round',
       onSelect: onAddPasskey,
     },
   ],

@@ -11,11 +11,11 @@ importers:
   .:
     dependencies:
       '@iconify-json/lucide':
-        specifier: ^1.2.70
-        version: 1.2.70
+        specifier: ^1.2.117
+        version: 1.2.117
       '@iconify-json/simple-icons':
-        specifier: ^1.2.54
-        version: 1.2.54
+        specifier: ^1.2.90
+        version: 1.2.90
       '@nuxt/ui':
         specifier: ^4.0.1
         version: 4.0.1(@babel/parser@7.28.4)(change-case@5.4.4)(db0@0.3.4)(embla-carousel@8.6.0)(ioredis@5.8.0)(magicast@0.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)(vite@7.1.9(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.1)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.5.1(vue@3.5.22(typescript@5.9.3)))(vue@3.5.22(typescript@5.9.3))(zod@4.1.11)
@@ -860,16 +860,16 @@ packages:
       }
     engines: { node: '>=18.18' }
 
-  '@iconify-json/lucide@1.2.70':
+  '@iconify-json/lucide@1.2.117':
     resolution:
       {
-        integrity: sha512-56s9NdBKgshywVY1e4gOcxzAbU1J649e/jLHBJU1tyNqRs7mFLVEGwj2mmzHJ5YAZB5Tsngi4f/ocTBPlG06ZA==,
+        integrity: sha512-7isYKJKWRZ8NfLNSY8pIYmRWiMBkopL4/X22gZfFmePFhc7az0hQ5biqBLG6vdDEvMctFu2suZB3yQ29RL+8tA==,
       }
 
-  '@iconify-json/simple-icons@1.2.54':
+  '@iconify-json/simple-icons@1.2.90':
     resolution:
       {
-        integrity: sha512-OQQYl8yC5j3QklZOYnK31QYe5h47IhyCoxSLd53f0e0nA4dgi8VOZS30SgSAbsecQ+S0xlGJMjXIHTIqZ+ML3w==,
+        integrity: sha512-zt2o2ZvQpHVvZJARIkZ51RnaHY2oqcPJMvHE+mVnxkSr+c33fnX4gciiXu+wyX5ei+s0qbVX1wD0DWBbaGBYMA==,
       }
 
   '@iconify/collections@1.0.602':
@@ -4075,6 +4075,12 @@ packages:
         integrity: sha512-hG1bReV+OUU+MOqK4t/ZWI0tZOyz3rqS9XuhOUz1cIcbwBKjOyJEJuw9ER5JuNyqxNk8u/JUVbGibBOL1yrjFw==,
       }
 
+  caniuse-lite@1.0.30001805:
+    resolution:
+      {
+        integrity: sha512-52noaS3DubycKSXaU30TwPGIp+POyQSUVa5jBEq3vkRkY0kjyb3LQgvhU6WGyCcyXqVLWO0Cw0Q6BSdD0kUfVA==,
+      }
+
   chai@6.2.0:
     resolution:
       {
@@ -6875,6 +6881,14 @@ packages:
     resolution:
       {
         integrity: sha512-ZB9RH/39qpq5Vu6Y+NmUaFhQR6pp+M2Xt76XBnEwDaGcVAqhlvxrl3B2bKS5D3NH3QR76v3aSrKaF/Kiy7lEtQ==,
+      }
+    engines: { node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1 }
+    hasBin: true
+
+  nanoid@3.3.16:
+    resolution:
+      {
+        integrity: sha512-bzlKTyNJ7+LdGIIwy8ijFpIqEQIvafahV7eYykJ8Cvh42EdJeODoJ6gUJXpQJvej1BddH8OqTXZNE/KfbWAu8Q==,
       }
     engines: { node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1 }
     hasBin: true
@@ -10305,11 +10319,11 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@iconify-json/lucide@1.2.70':
+  '@iconify-json/lucide@1.2.117':
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/simple-icons@1.2.54':
+  '@iconify-json/simple-icons@1.2.90':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -12696,6 +12710,8 @@ snapshots:
 
   caniuse-lite@1.0.30001799: {}
 
+  caniuse-lite@1.0.30001805: {}
+
   chai@6.2.0: {}
 
   chalk@4.1.2:
@@ -14305,6 +14321,8 @@ snapshots:
 
   nanoid@3.3.12: {}
 
+  nanoid@3.3.16: {}
+
   nanoid@5.1.6: {}
 
   nanotar@0.2.0: {}
@@ -14333,7 +14351,7 @@ snapshots:
       '@next/env': 13.5.11
       '@swc/helpers': 0.5.2
       busboy: 1.6.0
-      caniuse-lite: 1.0.30001799
+      caniuse-lite: 1.0.30001805
       postcss: 8.4.31
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -15205,7 +15223,7 @@ snapshots:
 
   postcss@8.4.31:
     dependencies:
-      nanoid: 3.3.12
+      nanoid: 3.3.16
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
