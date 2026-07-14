@@ -1,12 +1,12 @@
 <!-- eslint-disable vue/singleline-html-element-content-newline -->
 <template>
   <div
-    class="relative flex h-157.5 w-300 flex-col justify-between overflow-hidden bg-white p-18 dark:bg-neutral-900"
+    class="relative flex flex-col justify-between overflow-hidden bg-white p-18 dark:bg-neutral-900"
   >
     <!-- Brand -->
     <div class="relative flex items-center gap-5">
       <div
-        class="ring-default flex items-center justify-center rounded-md bg-neutral-50 p-4 text-[32px] ring dark:bg-neutral-950"
+        class="flex items-center justify-center rounded-md bg-neutral-50 p-4 text-[32px] dark:bg-neutral-950"
       >
         🍽
       </div>
