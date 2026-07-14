@@ -11,6 +11,8 @@ RUN pnpm exec playwright install chromium
 
 COPY . .
 
+# This layer and all following layers will rebuild when CACHE_BUST changes
+ARG CACHE_BUST=0
 RUN pnpm prisma:generate
 RUN pnpm build
 
