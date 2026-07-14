@@ -3,13 +3,13 @@
     <div class="flex gap-2">
       <UButton
         :color="usePasskey ? 'neutral' : 'primary'"
-        @click="usePasskey = false"
+        @click="setUsePasskey(false)"
       >
         Password
       </UButton>
       <UButton
         :color="usePasskey ? 'primary' : 'neutral'"
-        @click="usePasskey = true"
+        @click="setUsePasskey(true)"
       >
         Passkey
       </UButton>
@@ -76,6 +76,10 @@ const state = reactive<Partial<CreateAccount>>({
 });
 
 const usePasskey = ref(false);
+
+const setUsePasskey = (isPasskey: boolean) => {
+  usePasskey.value = isPasskey;
+};
 
 const validate = (state: CreateAccount): FormError[] => {
   const errors = [];

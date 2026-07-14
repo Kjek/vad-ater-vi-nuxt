@@ -6,11 +6,6 @@
         title="Edit Restaurant Config"
         description="Edit the restaurants config"
       >
-        <UButton
-          label="Edit"
-          color="neutral"
-          variant="outline"
-        />
         <template #body>
           <UForm
             :validate="validate"

@@ -35,7 +35,7 @@ const WEEKDAYS = [
   },
 ];
 
-export function detectWeekday(text: string): string | null {
+export function detectWeekday(text: string): string | undefined {
   for (const day of WEEKDAYS) {
     for (const pattern of day.patterns) {
       if (pattern.test(text)) {
@@ -44,10 +44,10 @@ export function detectWeekday(text: string): string | null {
     }
   }
 
-  return null;
+  return undefined;
 }
 
-export function extractDate(text: string): string | null {
+export function extractDate(text: string): string | undefined {
   const patterns = [
     // 6/7
     /\b\d{1,2}\/\d{1,2}\b/,
@@ -70,10 +70,10 @@ export function extractDate(text: string): string | null {
     }
   }
 
-  return null;
+  return undefined;
 }
 
-export function extractWeek(text: string): string | null {
+export function extractWeek(text: string): string | undefined {
   const patterns = [/vecka\s*(\d{1,2})/i, /week\s*(\d{1,2})/i, /\bv\.\s*(\d{1,2})/i];
 
   for (const pattern of patterns) {
@@ -84,17 +84,7 @@ export function extractWeek(text: string): string | null {
     }
   }
 
-  return null;
-}
-
-export function detectDates(text: string): DetectedDate {
-  return {
-    day: detectWeekday(text) ?? undefined,
-
-    date: extractDate(text) ?? undefined,
-
-    week: extractWeek(text) ?? undefined,
-  };
+  return undefined;
 }
 
 export function countDateSignals(text: string): number {

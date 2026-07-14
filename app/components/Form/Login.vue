@@ -4,14 +4,14 @@
       <UButton
         :color="usePasskey ? 'neutral' : 'primary'"
         variant="solid"
-        @click="usePasskey = false"
+        @click="setUsePasskey(false)"
       >
         Password
       </UButton>
       <UButton
         :color="usePasskey ? 'primary' : 'neutral'"
         variant="solid"
-        @click="usePasskey = true"
+        @click="setUsePasskey(true)"
       >
         Passkey
       </UButton>
@@ -44,7 +44,7 @@
       <UButton
         :label="usePasskey ? 'Login with Passkey' : 'Login'"
         type="submit"
-        :icon="usePasskey ? 'i-lucide-fingerprint-pattern' : undefined"
+        :icon="usePasskey ? 'i-lucide-key-round' : undefined"
       />
     </UForm>
   </div>
@@ -71,6 +71,10 @@ const state = reactive<LocalState>({
 });
 
 const usePasskey = ref(false);
+
+const setUsePasskey = (isPasskey: boolean) => {
+  usePasskey.value = isPasskey;
+};
 
 const validate = (state: LocalState): FormError[] => {
   const errors = [];
