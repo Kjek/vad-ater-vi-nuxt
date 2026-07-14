@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/singleline-html-element-content-newline -->
 <template>
   <div
+    :data-theme="colorMode"
     class="relative flex flex-col justify-between overflow-hidden bg-white p-18 dark:bg-neutral-900"
   >
     <!-- Brand -->
@@ -41,7 +42,10 @@ interface Props {
   description: string;
   motto: string;
   link: string;
+  colorMode?: 'dark' | 'light';
 }
 
-defineProps<Props>();
+withDefaults(defineProps<Props>(), {
+  colorMode: 'dark',
+});
 </script>

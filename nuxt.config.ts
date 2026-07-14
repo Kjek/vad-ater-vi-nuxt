@@ -58,6 +58,14 @@ export default defineNuxtConfig({
     },
   },
 
+  ogImage: {
+    defaults: {
+      takumi: {
+        format: 'webp',
+      },
+    },
+  },
+
   robots: {
     allow: ['/'],
     disallow: ['/login', '/admin'],

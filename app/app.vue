@@ -9,14 +9,6 @@ useHead({
   },
 });
 
-defineOgImage('VadAterVi.takumi', {
-  title: Constants.title,
-  subtitle: Constants.subtitle,
-  description: Constants.description,
-  motto: Constants.motto,
-  link: Constants.link,
-});
-
 useSeoMeta({
   title: Constants.title,
   description: Constants.description,
