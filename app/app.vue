@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { Constants } from './types/constants';
+
 useHead({
   meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }],
   link: [{ rel: 'icon', href: '/favicon.ico' }],
@@ -7,17 +9,11 @@ useHead({
   },
 });
 
-const title = 'Lunch i Sundsvall';
-const description =
-  'Vad äter vi? Kolla dagens eller veckans lunch i Sundsvall. Här listas olika restaurangers lunchmenyer för nuvarande vecka så man lätt kan ta reda på vad man vill äta för lunch.';
-
 useSeoMeta({
-  title,
-  description,
-  ogTitle: title,
-  ogDescription: description,
-  ogImage: 'https://ui.nuxt.com/assets/templates/nuxt/starter-light.png',
-  twitterImage: 'https://ui.nuxt.com/assets/templates/nuxt/starter-light.png',
+  title: Constants.title,
+  description: Constants.description,
+  ogTitle: Constants.title,
+  ogDescription: Constants.description,
   twitterCard: 'summary_large_image',
 });
 const toaster = { expand: false };

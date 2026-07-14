@@ -50,7 +50,7 @@
     </BaseText>
     <ul
       id="day-button-list"
-      class="hidden grow-[12] items-center justify-center gap-2 md:flex"
+      class="hidden grow-12 items-center justify-center gap-2 md:flex"
     >
       <li key="filter-week">
         <UButton

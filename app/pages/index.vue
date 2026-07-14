@@ -36,8 +36,15 @@
 import { storeToRefs } from 'pinia';
 import ItemSkeleton from '~/components/Lunch/ItemSkeleton.vue';
 import { useRestaurantsStore } from '~/stores/use-restaurants';
+import { Constants } from '~/types/constants';
 
 const restaurantsStore = useRestaurantsStore();
 const { restaurants } = storeToRefs(restaurantsStore);
-defineOgImageComponent('NuxtSeo');
+defineOgImage('VadAterVi.takumi', {
+  title: Constants.title,
+  subtitle: Constants.subtitle,
+  description: Constants.description,
+  motto: Constants.motto,
+  link: Constants.link,
+});
 </script>
