@@ -14,8 +14,6 @@ COPY . .
 RUN pnpm prisma:generate
 RUN pnpm build
 
-RUN rm -rf node_modules
-
 FROM node:24.18-bookworm-slim AS app
 
 WORKDIR /app
@@ -28,7 +26,6 @@ COPY --from=build /root/.cache/ms-playwright /root/.cache/ms-playwright
 
 RUN pnpm install --prod --frozen-lockfile --ignore-scripts
 RUN pnpm exec playwright install-deps
-RUN rm -rf node_modules
 
 EXPOSE 3000
 
