@@ -1,5 +1,14 @@
 import { getServerSession } from '#auth';
 
+const allowedPrerenderRoutes = (path: string) => {
+  return (
+    path.startsWith('/_nuxt') ||
+    path.startsWith('/_payload') ||
+    path.startsWith('/_og') ||
+    path.startsWith('/__nuxt')
+  );
+};
+
 export default defineEventHandler(async (event) => {
   const publicRoutes = [
     '/',
@@ -12,7 +21,11 @@ export default defineEventHandler(async (event) => {
   ];
 
   // /api/auth is excluded because it needs to see if a user is authenticated or not
-  if (publicRoutes.includes(event.path) || event.path.startsWith('/api/auth')) {
+  if (
+    publicRoutes.includes(event.path) ||
+    event.path.startsWith('/api/auth') ||
+    allowedPrerenderRoutes(event.path)
+  ) {
     return;
   }
 
