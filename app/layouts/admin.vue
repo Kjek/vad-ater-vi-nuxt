@@ -39,7 +39,7 @@ const restaurantConfigsStore = useRestaurantConfigsStore();
 const { createNewRestaurant } = restaurantConfigsStore;
 
 const onScrapeAll = async () => {
-  await useToastFetch('/api/scrapers');
+  await useToastFetch('/api/scrapers', { method: 'POST' });
 };
 
 const onCreateNewRestaurant = async (payload: CreateRestaurantConfig) => {
@@ -52,6 +52,7 @@ const onAddPasskey = async () => {
 };
 
 const onLogout = async () => {
+  console.log('oioi');
   await signOut({ callbackUrl: '/login' });
 };
 

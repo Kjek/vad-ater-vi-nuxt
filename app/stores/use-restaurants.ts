@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import type { Restaurant } from '~/types/lunch-menu';
 
 export const useRestaurantsStore = defineStore('restaurants', () => {
-  const { data, status } = useFetch<Restaurant[]>('/api/restaurants', { server: false });
+  const { data, status } = useFetch<Restaurant[]>('/api/restaurants/list', { server: false });
   const searchQuery = ref<string>();
 
   const restaurants = computed<Restaurant[]>(() => {
