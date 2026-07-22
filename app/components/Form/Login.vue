@@ -27,7 +27,7 @@
         label="Username"
         name="username"
       >
-        <UInput v-model="state.username" />
+        <UInput v-model.trim="state.username" />
       </UFormField>
 
       <UFormField

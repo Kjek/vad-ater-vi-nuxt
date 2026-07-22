@@ -2,6 +2,7 @@ import { getServerSession } from '#auth';
 
 const allowedPrerenderRoutes = (path: string) => {
   return (
+    path.startsWith('/_fonts') ||
     path.startsWith('/_nuxt') ||
     path.startsWith('/_payload') ||
     path.startsWith('/_og') ||
@@ -15,7 +16,6 @@ export default defineEventHandler(async (event) => {
     '/admin', // For redirecting purpose
     '/login',
     '/logout',
-    '/api/webauthn',
     '/api/restaurants/list',
     '/api/jobs/cron',
   ];
@@ -24,6 +24,7 @@ export default defineEventHandler(async (event) => {
   if (
     publicRoutes.includes(event.path) ||
     event.path.startsWith('/api/auth') ||
+    event.path.startsWith('/api/webauthn') ||
     allowedPrerenderRoutes(event.path)
   ) {
     return;
